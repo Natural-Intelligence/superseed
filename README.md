@@ -12,7 +12,7 @@ npm i super-seed
 
 ```js
 const {Seeder, SeedJob} = require('super-seed');
-const peopleSeeder = new SeedJob(<key>, <generartor>, <seeder>);
+const peopleSeeder = new SeedJob(<key>, <generator>, <seeder>);
 
 const seeder = new Seeder();
 seeder.addJob(peopleSeeder, 2);
@@ -74,7 +74,7 @@ class MyGenerator extends BaseMockGenerator {
     }));
   }
 }
-const peopleSeeder = new SeedJob('users', new MyGenerator(), mongodbSource.collection('users'));
+const peopleSeeder = new SeedJob('users', new MyGenerator(), myEntity);
 
 const seeder = new Seeder();
 seeder.addJob(peopleSeeder, 1);

@@ -81,3 +81,10 @@ seeder.addJob(peopleSeeder, 1);
 const data = await seeder.seed();
 
 ```
+
+# TO DO
+- eslint
+- mock generators: mongoose, mock-data-generator
+- cli tool
+- auto publish 
+- API improvement

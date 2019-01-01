@@ -16,7 +16,7 @@ The main package is super-seed.
 This package stores core entities and would be used mainly by developers wishing to build custom _Mock Generators_ and _Data Sources_.
 
 ## Mock Generators
-- super-seed-mocker-data-generator: Allow definitions mock generators using mocker-data-generator Schemas.
+- super-seed-mocker-data-generator: Allow definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
 
 ## Datasources
 - super-seed-mongodb: Allows savings seeds to a MongoDb database

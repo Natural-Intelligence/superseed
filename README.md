@@ -22,6 +22,22 @@ This package stores core entities and would be used mainly by developers wishing
 - super-seed-mongodb: Allows savings seeds to a MongoDb database
 - super-seed-restapi: Allows saving seeds via REST API 
 
+# Development
+## Getting started
+Running the command below would 
+- Bootstrap the packages in the current repo. 
+- Install all of their dependencies and links any cross-dependencies.
+
+```bash
+lerna boostrap
+```
+
+## Testing
+Running tests
+```bash
+npm run test
+```
+
 # TO DO
 - eslint
 - more tests

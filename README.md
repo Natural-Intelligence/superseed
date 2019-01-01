@@ -41,7 +41,7 @@ npm run test
 # TO DO
 - eslint
 - more tests
-- mock generators: mongoose schema (with validatejs support idf possible), mock-data-generator
+- mock generators: mongoose schema (with validatejs support if possible), mock-data-generator
 - cli tool
 - auto publish 
 - API improvement

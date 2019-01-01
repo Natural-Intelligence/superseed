@@ -50,7 +50,7 @@ const peopleSeeder = new SeedJob(
 const catSeeder = new SeedJob('cats', new MockSchema(cat), new CustomSeeded());
 
 const seeder = new Seeder();
-seeder.addSeed(peopleSeeder, 1).addSeed(catSeeder, 2);
+seeder.addJob(peopleSeeder, 1).addJob(catSeeder, 2);
 seeder.seed().then(data => {
     console.log(data);
 });

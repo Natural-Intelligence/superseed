@@ -4,8 +4,8 @@ Smart seed generation
 
 # Packages
 This project is split into multiples packages. There 4 types of packages
-- Main package
-- Core Package
+- Main package ([super-seed](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed))
+- Core Package ([super-seed-core](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed-core))
 - Mock Generators
 - Data Sources 
 
@@ -16,12 +16,12 @@ The main package is super-seed.
 This package stores core entities and would be used mainly by developers wishing to build custom _Mock Generators_ and _Data Sources_.
 
 ## Mock Generators
-- super-seed-mocker-data-generator: Allow definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
-- super-seed-mongoose: Allows Allow definitions mock generators using [mongoose](https://www.npmjs.com/package/mongoose) Schemas.
+- [super-seed-mocker-data-generator](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed-mocker-data-generator): Allow definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
+- [super-seed-mongoose](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed-mongoose): Allows Allow definitions mock generators using [mongoose](https://www.npmjs.com/package/mongoose) Schemas.
 
 ## Datasources
-- super-seed-mongodb: Allows savings seeds to a MongoDb database
-- super-seed-restapi: Allows saving seeds via REST API 
+-  [super-seed-mongodb](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed-mongodb): Allows savings seeds to a MongoDb database
+- [super-seed-restapi](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed-restapi): Allows saving seeds via REST API 
 
 # Development
 ## Getting started

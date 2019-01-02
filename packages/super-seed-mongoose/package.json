@@ -1,0 +1,16 @@
+{
+  "name": "super-seed-mongoose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose-dummy": "^1.0.8",
+    "super-seed-core": "^1.0.0"
+  }
+}

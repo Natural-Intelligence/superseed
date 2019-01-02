@@ -17,6 +17,7 @@ This package stores core entities and would be used mainly by developers wishing
 
 ## Mock Generators
 - super-seed-mocker-data-generator: Allow definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
+- super-seed-mongoose: Allows Allow definitions mock generators using [mongoose](https://www.npmjs.com/package/mongoose) Schemas.
 
 ## Datasources
 - super-seed-mongodb: Allows savings seeds to a MongoDb database
@@ -41,7 +42,7 @@ npm run test
 # TO DO
 - eslint
 - more tests
-- mock generators: mongoose schema (with validatejs support idf possible), mock-data-generator
+- mock generators: mongoose schema (with validatejs support if possible), mock-data-generator
 - cli tool
 - auto publish 
 - API improvement

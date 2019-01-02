@@ -28,7 +28,7 @@ SeedJobs's contructor takes 3 parameters
 ```js
  class CustomGenerator extends BaseMockGenerator {
   generate(db, count) {
-   // generate sone mock data
+   // generate some mock data
   }
 }
 class CustomSeeded extends BasedataSource{

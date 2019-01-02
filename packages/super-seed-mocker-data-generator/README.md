@@ -22,13 +22,20 @@ class CustomSeeded extends BasedataSource {
     }
 }
 
+// sample from mocker-data-generator
 const person = {
     firstName: {
-        chance: 'word'
+        faker: 'name.firstName'
     },
     lastName: {
-        chance: 'word'
-    }
+        faker: 'name.lastName'
+    },
+    country: {
+        faker: 'address.country'
+    },
+    createdAt: {
+        faker: 'date.past'
+    },
 };
 
 const cat = {

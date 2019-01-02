@@ -4,7 +4,7 @@ Smart seed generation
 
 # Packages
 This project is split into multiples packages. There 4 types of packages
-- Main package ([super-seed](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed))
+- Main package ([super-seed](packages/super-seed))
 - Core Package ([super-seed-core](https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed-core))
 - Mock Generators
 - Data Sources 

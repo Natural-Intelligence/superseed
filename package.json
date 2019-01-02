@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts":{
-    "test": "npx mocha --recursive --no-timeouts integration-test/*"
+    "test": "npx mocha --recursive --no-timeouts integration-test/* && lerna run test"
   },
   "devDependencies": {
     "chai": "^4.2.0",

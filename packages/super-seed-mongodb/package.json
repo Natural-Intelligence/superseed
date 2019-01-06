@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "apache-2.0",
   "dependencies": {
     "mongodb": "^3.1.10",
     "super-seed-core": "^1.0.0"

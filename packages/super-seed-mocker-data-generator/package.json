@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "apache-2.0",
   "dependencies": {
     "mocker-data-generator": "^2.6.6",
     "super-seed-core": "^1.0.0"

@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "apache-2.0",
   "dependencies": {
     "restful-model": "^0.1.8",
     "super-seed-core": "^1.0.0"

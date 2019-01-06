@@ -1,3 +1,5 @@
+<img src="ni-eng-strip.jpg" alt="NI Engineering">
+
 # super-seed
 
 Smart seed generation

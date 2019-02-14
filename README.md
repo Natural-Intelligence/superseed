@@ -32,7 +32,7 @@ Running the command below would
 - Install all of their dependencies and links any cross-dependencies.
 
 ```bash
-lerna boostrap
+lerna bootstrap
 ```
 
 ## Testing

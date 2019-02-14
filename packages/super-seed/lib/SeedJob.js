@@ -17,4 +17,8 @@ module.exports = class SeedJob {
     createSeeds(models){
         return this.seeder.createSeeds(models);
     }
+
+    deleteSeeds(models) {
+      return this.seeder.deleteSeeds(models);
+    }
 }

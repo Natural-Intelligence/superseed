@@ -1,35 +1,53 @@
 module.exports = class Seeder {
-    constructor() {
-      this.models = {};
-    }
-  
-    addJob(entitySeed, count) {
-      this.models[entitySeed.getKey()] = {
-        generateSeeds: (db) => {
-          return entitySeed.generateSeeds(db, count);
-        },
-        createSeeds: model => {
-          return entitySeed.createSeeds(model);
-        }
-      };
-        
-      return this;
-    }
-  
-    async seed() {
-      const db = {};
-      const entityKeys = Object.keys(this.models);
-      try {
-        for (const modelKey of entityKeys) {
-          const modelConfig = this.models[modelKey];
-          db[modelKey] = [];
-          const models = modelConfig.generateSeeds(db);
-          db[modelKey] = await modelConfig.createSeeds(models);
-        }
-      } catch (e) {
-        console.log('Error:', e);
+  constructor() {
+    this.models = {};
+  }
+
+  addJob(seedJob, count) {
+    this.models[seedJob.getKey()] = {
+      generateSeeds: (db) => {
+        return seedJob.generateSeeds(db, count);
+      },
+      createSeeds: models => {
+        return seedJob.createSeeds(models);
+      },
+      deleteSeeds: models => {
+        return seedJob.deleteSeeds(models);
       }
-      return db;
+    };
+
+    return this;
+  }
+
+  async seed() {
+    const db = {};
+    const entityKeys = Object.keys(this.models);
+    try {
+      for (const modelKey of entityKeys) {
+        const modelConfig = this.models[modelKey];
+        db[modelKey] = [];
+        const models = modelConfig.generateSeeds(db);
+        db[modelKey] = await modelConfig.createSeeds(models);
+      }
+    } catch (e) {
+      console.log('Error:', e);
     }
-  };
-  
+    this.db = db;
+    return db;
+  }
+
+  async unseed() {
+    const {db} = this;
+    const entityKeys = Object.keys(this.models);
+    try {
+      for (const modelKey of entityKeys) {
+        const modelConfig = this.models[modelKey];
+        const models = db[modelKey];
+        db[modelKey] = await modelConfig.deleteSeeds(models);
+      }
+    } catch (e) {
+      console.log('Error:', e);
+    }
+    return db;
+  }
+};

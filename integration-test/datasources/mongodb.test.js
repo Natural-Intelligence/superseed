@@ -33,5 +33,6 @@ describe('seeder', () => {
     const data = await seeder.seed();
     expect(data.users[0].name).to.eql('test');
     expect(data.users[0]).to.haveOwnProperty('_id');
+    await seeder.unseed();
   });
 });

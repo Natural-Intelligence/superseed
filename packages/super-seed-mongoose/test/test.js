@@ -1,4 +1,4 @@
-const MongooseMochGenerator = require('../index');
+const MongooseMockGenerator = require('../index');
 const {expect} = require('chai');
 const {
   Schema: {
@@ -17,7 +17,7 @@ const personSchema = {
   email: {
     type: String
   },
-  concact_us: {
+  contact_us: {
     type: String
   },
   birth_date: {
@@ -42,7 +42,7 @@ const catSchema = {
 
 const options = {
   ignore: ['_id', 'id'],
-  concact_us: {generator: 'email'}
+  contact_us: {generator: 'email'}
 };
 
 const catOptions = {
@@ -54,8 +54,8 @@ const catOptions = {
 };
 
 describe('MongooseMockGenerator test', () => {
-  const generator = new MongooseMochGenerator('User', personSchema, options);
-  const catGenerator = new MongooseMochGenerator('Cat', catSchema, catOptions);
+  const generator = new MongooseMockGenerator('User', personSchema, options);
+  const catGenerator = new MongooseMockGenerator('Cat', catSchema, catOptions);
   it('simple test', () => {
     const data = generator.generate({}, 2);
     expect(data.length).to.eql(2);
@@ -76,6 +76,7 @@ describe('MongooseMockGenerator test', () => {
   it('email', () => {
     const data = generator.generate({}, 1);
     expect(data.length).to.eql(1);
-    expect(data[0].concact_us.test(`[\w]+@[\w]`)).to.eql(true);
+    const email = data[0].contact_us;
+    expect(/[\w]+\@[\w]+.[\w]+/.test(email)).to.eql(true);
   });
 });

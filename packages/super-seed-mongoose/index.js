@@ -17,16 +17,19 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
   }
 
   buildOptions(db) {
-    let options = {force: {}, custom: {email: []}};
+    let options = {force: {}, custom: {email: [], phone: [], address: [], password: []}};
     Object.keys(this.options).forEach(field => {
       if (this.options[field].generator === 'hasMany') {
         options.force[field] = hasMany(db, this.options[field]);
       } else if (this.options[field].generator === 'hasOne') {
         options.force[field] = hasOne(db, this.options[field]);
+      } else {
+        ['email', 'phone', 'address'].forEach((fieldType) => {
+          if (this.options[field].generator === fieldType) {
+            options.custom[fieldType].push(field);
+          }
+        });
       }
-      // else if (this.options[field].generator === 'email') {
-      //   options.custom.email.push(field);
-      // }
     });
     return options;
   }

@@ -9,8 +9,8 @@ Smart mock generation and and seed storage
 - Save mock data to you preferred target source. Available datasources listed [here](#data-sources)
 
 ## [Mock Generators](#mock-generators)
-- [super-seed-mocker-data-generator](packages/super-seed-mocker-data-generator): Allow definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
-- [super-seed-mongoose](packages/super-seed-mongoose): Allows Allow definitions mock generators using [mongoose](https://www.npmjs.com/package/mongoose) Schemas.
+- [super-seed-mocker-data-generator](packages/super-seed-mocker-data-generator): Allows definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
+- [super-seed-mongoose](packages/super-seed-mongoose): Allows definitions mock generators using [mongoose](https://www.npmjs.com/package/mongoose) Schemas.
 
 ## [Datasources](#data-sources)
 - [super-seed-mongodb](packages/super-seed-mongodb): Allows savings seeds to a MongoDb database

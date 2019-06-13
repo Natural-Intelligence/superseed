@@ -9,6 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "apache-2.0",
+  "homepage": "https://github.com/Natural-Intelligence/super-seed",
+  "repository": "github:Natural-Intelligence/super-seed",
   "dependencies": {
     "@superseed/core": "^1.0.0",
     "mongoose-dummy": "^1.0.8"

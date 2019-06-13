@@ -8,6 +8,8 @@
   },
   "keywords": [],
   "author": "",
+  "homepage": "https://github.com/Natural-Intelligence/super-seed",
+  "repository": "github:Natural-Intelligence/super-seed",
   "license": "apache-2.0",
   "dependencies": {
     "@superseed/core": "^1.0.0",

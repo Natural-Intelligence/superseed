@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb');
-const { BaseDataSource } = require('super-seed-core');
+const { BaseDataSource } = require('@superseed/core');
 
 function getInserted(insertResult) {
   return insertResult.ops;

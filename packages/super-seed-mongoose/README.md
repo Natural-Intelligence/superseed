@@ -5,7 +5,7 @@ A super-seed module that allows support for MochGenerators using [mongoose](http
 # Install
 
 ```bash
-npm install super-seed-mongoose
+npm install @superseed/mongoose
 ```
 
 # Usage 
@@ -13,8 +13,8 @@ npm install super-seed-mongoose
 _Example:_
 
 ```js
-const {Seeder, SeedJob} = require('super-seed');
-const MongooseMockGenerator = require('super-seed-mongoose');
+const {Seeder, SeedJob} = require('@superseed/superseed');
+const MongooseMockGenerator = require('@superseed/mongoose');
 
 class CustomSeeded extends BasedataSource {
     createSeeds(seeds) {

@@ -3,7 +3,7 @@ REST API data source for super-seed
 
 # Install
 ```bash
-npm install super-seed-mongodb
+npm install @superseed/mongodb
 ```
 
 ## Usage example
@@ -13,9 +13,9 @@ The Mongo DB data souce allow storage of seeds to MongoDB
 *Example:*
 
 ```js
-const {Seeder, SeedJob} = require('super-seed');
-const MongoDBSource = require('super-seed-mongodb');
-const {BaseMockGenerator} = require('super-seed-core');
+const {Seeder, SeedJob} = require('@superseed/superseed');
+const MongoDBSource = require('@superseed/mongodb');
+const {BaseMockGenerator} = require('@superseed/core');
 
 class MyGenerator extends BaseMockGenerator {
   generate(db, count) {

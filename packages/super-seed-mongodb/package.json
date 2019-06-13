@@ -1,5 +1,5 @@
 {
-  "name": "super-seed-mongodb",
+  "name": "@superseed/mongodb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,6 @@
   "license": "apache-2.0",
   "dependencies": {
     "mongodb": "^3.1.10",
-    "super-seed-core": "^1.0.0"
+    "@superseed/core": "^1.0.0"
   }
 }

@@ -1,5 +1,5 @@
 const RestService = require('restful-model');
-const { BaseDataSource } = require('super-seed-core');
+const { BaseDataSource } = require('@superseed/core');
 // const BaseDatasource = require('../BaseDatasource');
 const {fetchRequest, fetchResponse} = RestService.defaultMiddlewares;
 

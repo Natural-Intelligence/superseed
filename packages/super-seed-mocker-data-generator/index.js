@@ -1,5 +1,5 @@
 const {Schema} = require('mocker-data-generator');
-const { BaseMockGenerator } = require('super-seed-core');
+const { BaseMockGenerator } = require('@super-seed/core');
 
 class MockDataGeneratorSchema extends BaseMockGenerator {
   constructor(name, schema) {

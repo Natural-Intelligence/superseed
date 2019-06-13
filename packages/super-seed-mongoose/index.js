@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const {
   BaseMockGenerator,
   generators: {hasMany, hasOne}
-} = require('super-seed-core');
+} = require('@superseed/core');
 
 const mongooseDummyOptions = {autoDetect: false};
 

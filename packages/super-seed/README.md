@@ -5,14 +5,14 @@ Smart seed generation
 # Install
 
 ```
-npm i super-seed
+npm i @superseed/superseed
 ```
 
 # Usage
 
 ### 1. Require Seed helpers
 ```js
-const {Seeder, SeedJob} = require('super-seed');
+const {Seeder, SeedJob} = require('@superseed/superseed');
 ```
 
 ### 2. Define seed jobs

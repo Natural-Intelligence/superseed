@@ -1,5 +1,5 @@
 {
-  "name": "super-seed-mongoose",
+  "name": "@super-seed/mongoose",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,6 @@
   "license": "apache-2.0",
   "dependencies": {
     "mongoose-dummy": "^1.0.8",
-    "super-seed-core": "^1.0.0"
+    "@superseed/core": "^1.0.0"
   }
 }

@@ -5,7 +5,7 @@ A super-seed module that allows support for MochGenerators using [mocker-data-ge
 # Install
 
 ```bash
-npm install super-seed-mocker-data-generator
+npm install @superseed/mocker-data-generator
 ```
 
 # Usage
@@ -13,8 +13,8 @@ npm install super-seed-mocker-data-generator
 _Example:_
 
 ```js
-const {Seeder, SeedJob} = require('super-seed');
-const MockSchema = require('super-seed-mocker-data-generator');
+const {Seeder, SeedJob} = require('@super-seed/superseed');
+const MockSchema = require('@superseed/mocker-data-generator');
 
 class CustomSeeded extends BasedataSource {
     createSeeds(seeds) {

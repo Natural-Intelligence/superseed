@@ -9,26 +9,26 @@ Smart mock generation and and seed storage
 - Save mock data to you preferred target source (REST API, MongoDB) . Available data sources listed [here](#data-sources).
 
 ## [Mock Generators](#mock-generators)
-- [super-seed-mocker-data-generator](packages/super-seed-mocker-data-generator): Allows definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
-- [super-seed-mongoose](packages/super-seed-mongoose): Allows definitions mock generators using [mongoose](https://www.npmjs.com/package/mongoose) Schemas.
+- [@superseed/mocker-data-generator](packages/super-seed-mocker-data-generator): Allows definitions mock generators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schemas.
+- [@superseed/mongoose](packages/super-seed-mongoose): Allows definitions mock generators using [mongoose](https://www.npmjs.com/package/mongoose) Schemas.
 
 ## [Data Sources](#data-sources)
-- [super-seed-mongodb](packages/super-seed-mongodb): Allows savings seeds to a MongoDb database
-- [super-seed-restapi](packages/super-seed-restapi): Allows saving seeds via REST API 
+- [@superseed/mongodb](packages/super-seed-mongodb): Allows savings seeds to a MongoDb database
+- [@superseed/restapi](packages/super-seed-restapi): Allows saving seeds via REST API 
 
 # Development
 
 ## Packages
 This project is split into multiples packages. There 4 types of packages
-- Main package ([super-seed](packages/super-seed))
-- Core Package ([super-seed-core](packages/super-seed-core))
+- Main package ([@superseed/superseed](packages/super-seed))
+- Core Package ([@superseed/core](packages/super-seed-core))
 - Mock Generators
 - Data Sources
 
-### Main Package - super-seed
+### Main Package - [@superseed/superseed](packages/super-seed)
 The main package is super-seed.
 
-### Core Package - super-seed-core
+### Core Package - [@superseed/core](packages/super-seed-core)
 This package stores core entities and would be used mainly by developers wishing to build custom _Mock Generators_ and _Data Sources_.
 
 ## Getting started

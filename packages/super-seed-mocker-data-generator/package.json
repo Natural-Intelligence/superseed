@@ -1,5 +1,5 @@
 {
-  "name": "super-seed-mocker-data-generator",
+  "name": "@super-seed/mocker-data-generator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,6 @@
   "license": "apache-2.0",
   "dependencies": {
     "mocker-data-generator": "^2.6.6",
-    "super-seed-core": "^1.0.0"
+    "@superseed/core": "^1.0.0"
   }
 }

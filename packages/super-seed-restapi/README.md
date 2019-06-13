@@ -1,4 +1,4 @@
-# super-seed-restapi
+# @superseed/restapi
 REST API data source for super-seed
 
 # Install
@@ -9,9 +9,9 @@ npm install super-seed-restapi
 ## Usage example
 ```js
 
-const {Seeder, SeedJob} = require('super-seed');
-const APISource = require('super-seed-restapi');
-const {BaseMockGenerator} = require('super-seed-core');
+const {Seeder, SeedJob} = require('@superseed/superseed');
+const APISource = require('@superseed/estapi');
+const {BaseMockGenerator} = require('@superseed/core');
 
 const myService = new APISource({
   baseURL: 'http://localhost:1234/api/v1',

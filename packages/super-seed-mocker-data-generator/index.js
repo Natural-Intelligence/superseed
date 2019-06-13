@@ -1,10 +1,11 @@
-const {Schema} = require('mocker-data-generator');
-const { BaseMockGenerator } = require('@super-seed/core');
+const { Schema } = require('mocker-data-generator');
+const { BaseMockGenerator } = require('@superseed/core');
 
 class MockDataGeneratorSchema extends BaseMockGenerator {
   constructor(name, schema) {
-      this.schema = schema;
-      this.name = name;
+    super();
+    this.schema = schema;
+    this.name = name;
   }
 
   getSchema() {
@@ -12,9 +13,9 @@ class MockDataGeneratorSchema extends BaseMockGenerator {
   }
 
   generate(db, count) {
-      const schema = new Schema(this.name, this.schema, count);
-      return schema.build(db); 
+    const schema = new Schema(this.name, this.schema, count);
+    return schema.build(db);
   }
 }
 
-module.exports = {MockDataGeneratorSchema};
+module.exports = { MockDataGeneratorSchema };

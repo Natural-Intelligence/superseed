@@ -13,6 +13,7 @@
   "repository": "github:Natural-Intelligence/super-seed",
   "dependencies": {
     "@superseed/core": "^1.0.0",
+    "mongoose": "^5.5.15",
     "mongoose-dummy": "^1.0.8"
   }
 }

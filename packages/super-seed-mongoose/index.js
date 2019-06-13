@@ -2,10 +2,10 @@ const dummy = require('mongoose-dummy');
 const mongoose = require('mongoose');
 const {
   BaseMockGenerator,
-  generators: {hasMany, hasOne}
+  generators: { hasMany, hasOne },
 } = require('@superseed/core');
 
-const mongooseDummyOptions = {autoDetect: false};
+// const mongooseDummyOptions = { autoDetect: false };
 
 module.exports = class MongooseMockGenerator extends BaseMockGenerator {
   constructor(modelName, mongooseSchema, options = {}) {
@@ -17,8 +17,13 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
   }
 
   buildOptions(db) {
-    let options = {force: {}, custom: {email: [], phone: [], address: [], password: []}};
-    Object.keys(this.options).forEach(field => {
+    const options = {
+      force: {},
+      custom: {
+        email: [], phone: [], address: [], password: [],
+      },
+    };
+    Object.keys(this.options).forEach((field) => {
       if (this.options[field].generator === 'hasMany') {
         options.force[field] = hasMany(db, this.options[field]);
       } else if (this.options[field].generator === 'hasOne') {

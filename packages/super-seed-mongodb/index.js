@@ -13,18 +13,18 @@ class MongoDbCollection extends BaseDataSource {
   }
 
 
-  async getCollection (){
-    const {url, dbName, options = {}} = this.dbConfig;
+  async getCollection() {
+    const { url, dbName, options = {} } = this.dbConfig;
     const client = await MongoClient.connect(
       url,
-      options
+      options,
     );
     const collection = client.db(dbName).collection(this.collectionName);
-    return {client, collection}
+    return { client, collection };
   }
 
   async createSeeds(seeds) {
-    const {client, collection} = await this.getCollection();
+    const { client, collection } = await this.getCollection();
 
     const inserted = await collection.insertMany(seeds);
     client.close();
@@ -32,9 +32,9 @@ class MongoDbCollection extends BaseDataSource {
   }
 
   async deleteSeeds(seeds) {
-    const {client, collection} = await this.getCollection();
-    const seedIds = seeds.map(({_id: id}) => id);
-    await collection.deleteMany({_id: {$in: seedIds}});
+    const { client, collection } = await this.getCollection();
+    const seedIds = seeds.map(({ _id: id }) => id);
+    await collection.deleteMany({ _id: { $in: seedIds } });
     client.close();
   }
 }

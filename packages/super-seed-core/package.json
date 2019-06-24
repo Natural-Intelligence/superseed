@@ -10,5 +10,8 @@
   "repository": "github:Natural-Intelligence/super-seed",
   "keywords": [],
   "author": "",
-  "license": "apache-2.0"
+  "license": "apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -14,5 +14,8 @@
   "dependencies": {
     "@superseed/core": "^1.0.1",
     "restful-model": "^0.1.8"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

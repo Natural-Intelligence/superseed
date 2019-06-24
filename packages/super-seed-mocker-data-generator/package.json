@@ -14,5 +14,8 @@
   "dependencies": {
     "@superseed/core": "^1.0.1",
     "mocker-data-generator": "^2.6.6"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

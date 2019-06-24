@@ -15,5 +15,8 @@
     "@superseed/core": "^1.0.1",
     "mongoose": "^5.5.15",
     "mongoose-dummy": "^1.0.8"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

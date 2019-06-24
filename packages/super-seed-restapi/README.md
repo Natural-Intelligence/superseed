@@ -10,7 +10,7 @@ npm install super-seed-restapi
 ```js
 
 const {Seeder, SeedJob} = require('@superseed/superseed');
-const APISource = require('@superseed/estapi');
+const APISource = require('@superseed/restapi');
 const {BaseMockGenerator} = require('@superseed/core');
 
 const myService = new APISource({

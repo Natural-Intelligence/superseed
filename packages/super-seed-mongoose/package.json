@@ -1,6 +1,6 @@
 {
   "name": "@super-seed/mongoose",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "homepage": "https://github.com/Natural-Intelligence/super-seed",
   "repository": "github:Natural-Intelligence/super-seed",
   "dependencies": {
-    "@superseed/core": "^1.0.0",
+    "@superseed/core": "^1.0.1",
     "mongoose": "^5.5.15",
     "mongoose-dummy": "^1.0.8"
   }

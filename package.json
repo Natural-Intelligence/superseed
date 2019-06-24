@@ -16,5 +16,8 @@
     "lerna": "^3.8.0",
     "mocha": "^5.2.0",
     "nock": "^10.0.5"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

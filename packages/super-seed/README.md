@@ -1,6 +1,6 @@
 # super-seed
 
-Smart seed generation
+Smart seed generation.
 
 # Install
 

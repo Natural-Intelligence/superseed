@@ -1,6 +1,6 @@
 # super-seed-mongoose
 
-A super-seed module that allows support for MochGenerators using [mongoose](https://www.npmjs.com/package/mongoose) schema
+A super-seed module that allows support for MockGenerators using [mongoose](https://www.npmjs.com/package/mongoose) schema
 
 # Install
 
@@ -13,6 +13,7 @@ npm install @superseed/mongoose
 _Example:_
 
 ```js
+const {Schema} = require('mongoose');
 const {Seeder, SeedJob} = require('@superseed/superseed');
 const MongooseMockGenerator = require('@superseed/mongoose');
 
@@ -66,13 +67,13 @@ const catOptions = {
 
 const personSeedJob = new SeedJob(
     'users',
-    new MongooseMockGenerator('User', userSchema, options),
+    new MongooseMockGenerator('User', new Schema(userSchema), options),
     new CustomSeeded()
 );
 
 const catSeedJob = new SeedJob(
     'cats',
-    new MongooseMockGenerator('Cat', catSchema, catOptions),
+    new MongooseMockGenerator('Cat', new Schema(catSchema), catOptions),
     new CustomSeeded()
 );
 

@@ -24,6 +24,18 @@ class MyGenerator extends BaseMockGenerator {
     }));
   }
 }
+
+const mongodbSource = new MongoDBSource({
+      url: 'mongodb://localhost:27017',
+      dbName: 'test-seeds',
+      options: {
+        auth: {
+          user: 'user',
+          password: 'password'
+        }
+      }
+});
+
 const peopleSeeder = new SeedJob('users', new MyGenerator(), mongodbSource.collection('users'));
 
 const seeder = new Seeder();

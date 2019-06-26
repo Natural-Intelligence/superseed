@@ -1,12 +1,11 @@
 {
   "name": "@superseed/mongodb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "keywords": [],
   "author": "",
   "license": "apache-2.0",
   "homepage": "https://github.com/Natural-Intelligence/super-seed",
@@ -17,5 +16,11 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": [
+    "seed",
+    "mongodb",
+    "test",
+    "mock"
+  ]
 }

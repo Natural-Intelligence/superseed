@@ -6,7 +6,6 @@
   "scripts": {
     "test": "npx mocha --recursive --no-timeouts test/*"
   },
-  "keywords": [],
   "author": "",
   "license": "apache-2.0",
   "homepage": "https://github.com/Natural-Intelligence/super-seed",
@@ -18,5 +17,11 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": [
+    "seed",
+    "mongoose",
+    "test",
+    "mock"
+  ]
 }

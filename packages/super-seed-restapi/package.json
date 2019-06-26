@@ -1,12 +1,11 @@
 {
   "name": "@superseed/restapi",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "keywords": [],
   "author": "",
   "homepage": "https://github.com/Natural-Intelligence/super-seed",
   "repository": "github:Natural-Intelligence/super-seed",
@@ -17,5 +16,11 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": [
+    "seed",
+    "REST API",
+    "test",
+    "mock"
+  ]
 }

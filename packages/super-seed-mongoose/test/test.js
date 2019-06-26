@@ -1,10 +1,9 @@
 const MongooseMockGenerator = require('../index');
 const {expect} = require('chai');
+const {Schema} = require('mongoose');
 const {
-  Schema: {
-    Types: {ObjectId}
-  }
-} = require('mongoose');
+  Types: {ObjectId}
+} = Schema;
 
 const personSchema = {
   id: ObjectId,
@@ -60,8 +59,8 @@ describe('MongooseMockGenerator test', () => {
     const data = generator.generate({}, 2);
     expect(data.length).to.eql(2);
     data.forEach(item => {
-      expect(item).to.haveOwnProperty('name');
-      expect(item).to.haveOwnProperty('email');
+      expect(item).to.have.property('name');
+      expect(item).to.have.property('email');
       expect(['Male', 'Female'].includes(item.gender)).to.eql(true);
     });
   });
@@ -78,5 +77,78 @@ describe('MongooseMockGenerator test', () => {
     expect(data.length).to.eql(1);
     const email = data[0].contact_us;
     expect(/[\w]+\@[\w]+.[\w]+/.test(email)).to.eql(true);
+  });
+
+  describe('custom generator', () => {
+    it('must handle top level', () => {
+      const schema = {title: String};
+      const options = {
+        title: {
+          generator: () => {
+            return 'axb';
+          }
+        }
+      };
+      const generator = new MongooseMockGenerator('Person', new Schema(schema), options);
+      const [mock] = generator.generate({}, 1);
+
+      expect(mock).to.have.property('title');
+      console.log(mock);
+    });
+
+    it('must handle top level array', () => {
+      const schema = {names: [{type: String, min: 2, max: 5}]};
+      const names = ['a', 'b', 'c'];
+      let i = -1;
+      const options = {
+        names: {
+          generator: () => {
+            i++;
+            return names[i];
+          }
+        }
+      };
+      const generator = new MongooseMockGenerator('NameList', new Schema(schema), options);
+      const [mock] = generator.generate({}, 1);
+
+      expect(mock.names.length > 0).to.eql(true);
+      expect(mock.names[0]).to.eql('a');
+      console.log(mock);
+    });
+   // mongoose-dummy does not support embedded properties
+    it.skip('must handle nested level', () => {
+      const nested = new Schema({name: String});
+      const schema = {info: nested};
+      const options = {
+        "info.name": {
+          generator: () => {
+            return 'axb';
+          }
+        }
+      };
+      const generator = new MongooseMockGenerator('Person', new Schema(schema), options);
+      const [mock] = generator.generate({}, 1);
+
+      expect(mock.info).to.have.property('name');
+    });
+
+    it('must handle nested in array', () => {
+      const nested = new Schema({name: String});
+      const schema = {customers: [nested]};
+      const options = {
+        "customers.name": {
+          generator: () => {
+            return 'axb';
+          }
+        }
+      };
+      const generator = new MongooseMockGenerator('CustomersInfo', new Schema(schema), options);
+      const mocks = generator.generate({}, 2);
+      mocks.forEach(mock => {
+        mock.customers.forEach(customer => {
+          expect(customer).to.have.property('name');
+        });
+      });
+    });
   });
 });

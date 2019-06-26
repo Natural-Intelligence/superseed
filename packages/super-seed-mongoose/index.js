@@ -23,9 +23,23 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
         email: [], phone: [], address: [], password: [],
       },
     };
+
+    const paths = dummy.getPaths(this.mongooseSchema);
     Object.keys(this.options).forEach((field) => {
       if (typeof this.options[field].generator === 'function') {
-        options.force[field] = this.options[field].generator();
+        if (paths[field]) {
+          if (paths[field].type === 'Array') {
+            options.force[field] = [];
+            const max = this.options[field].max || 5;
+            const min = this.options[field].min || 1;
+            const randomNum =  Math.floor((Math.random() * max) + min);
+            for (let i = 0; i < randomNum; i++) {
+              options.force[field].push(this.options[field].generator());
+            }
+          } else {
+            options.force[field] = this.options[field].generator();
+          }
+        }
       } else if (this.options[field].generator === 'hasMany') {
         options.force[field] = hasMany(db, this.options[field]);
       } else if (this.options[field].generator === 'hasOne') {

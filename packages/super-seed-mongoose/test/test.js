@@ -53,8 +53,8 @@ const catOptions = {
 };
 
 describe('MongooseMockGenerator test', () => {
-  const generator = new MongooseMockGenerator('User', personSchema, options);
-  const catGenerator = new MongooseMockGenerator('Cat', catSchema, catOptions);
+  const generator = new MongooseMockGenerator('User', new Schema(personSchema), options);
+  const catGenerator = new MongooseMockGenerator('Cat', new Schema(catSchema), catOptions);
   it('simple test', () => {
     const data = generator.generate({}, 2);
     expect(data.length).to.eql(2);
@@ -132,7 +132,7 @@ describe('MongooseMockGenerator test', () => {
       expect(mock.info).to.have.property('name');
     });
 
-    it('must handle nested in array', () => {
+    it('must handle nested object in array', () => {
       const nested = new Schema({name: String});
       const schema = {customers: [nested]};
       const options = {
@@ -147,6 +147,24 @@ describe('MongooseMockGenerator test', () => {
       mocks.forEach(mock => {
         mock.customers.forEach(customer => {
           expect(customer).to.have.property('name');
+        });
+      });
+    });
+    it('must handle nested string in array', () => {
+      const schema = {customers: [{type: String}]};
+      const options = {
+        "customers": {
+          generator: () => {
+            return 'axb';
+          }
+        }
+      };
+      const generator = new MongooseMockGenerator('CustomerNames', new Schema(schema), options);
+      const mocks = generator.generate({}, 2);
+      mocks.forEach(mock => {
+        expect(Array.isArray(mock.customers)).to.eql(true);
+        mock.customers.forEach(customer => {
+          expect(typeof customer).to.eql('string');
         });
       });
     });

@@ -1,6 +1,6 @@
 {
   "name": "@superseed/mongodb",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/Natural-Intelligence/super-seed/issues"
   },
   "keywords": [
     "seed",

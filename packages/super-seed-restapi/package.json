@@ -1,14 +1,17 @@
 {
   "name": "@superseed/restapi",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "author": "",
-  "homepage": "https://github.com/Natural-Intelligence/super-seed",
+  "homepage": "https://github.com/Natural-Intelligence/super-seed/tree/master/packages/super-seed-restapi",
   "repository": "github:Natural-Intelligence/super-seed",
+  "bugs": {
+    "url": "https://github.com/Natural-Intelligence/super-seed/issues?q=is%3Aissue+is%3Aopen+label%3Amongoose"
+  },
   "license": "apache-2.0",
   "dependencies": {
     "@superseed/core": "^1.0.1",

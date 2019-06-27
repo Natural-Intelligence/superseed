@@ -5,8 +5,8 @@ const hasOne = (db, config) => {
     var dbString = JSON.stringify(exclude);
     for (var i = 0; i < db[target].length; i++) {
       var item = db[target][i];
-      if (dbString.indexOf(JSON.stringify(item)) < 0) {
-        entity = element;
+      if (dbString.indexOf(JSON.stringify(foreignField ? item[foreignField] : item)) < 0) {
+        entity = item;
         break;
       }
     }
@@ -17,7 +17,7 @@ const hasOne = (db, config) => {
     const index = Math.floor(Math.random() * Math.floor(db[target].length));
     entity = db[target][index];
   }
-  return entity[foreignField];
+  return foreignField ? entity[foreignField] : entity;
 };
 
 const hasMany = (db, config) => {
@@ -42,6 +42,6 @@ const hasMany = (db, config) => {
 };
 
 module.exports = {
-    hasOne,
-    hasMany
+  hasOne,
+  hasMany
 };

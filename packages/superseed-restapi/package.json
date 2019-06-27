@@ -1,25 +1,28 @@
 {
-  "name": "@superseed/mocker-data-generator",
-  "version": "1.0.3",
+  "name": "@superseed/restapi",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "author": "",
-  "homepage": "https://github.com/Natural-Intelligence/super-seed",
+  "homepage": "https://github.com/Natural-Intelligence/superseed/tree/master/packages/superseed-restapi",
   "repository": "github:Natural-Intelligence/super-seed",
+  "bugs": {
+    "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Arestapi"
+  },
   "license": "apache-2.0",
   "dependencies": {
     "@superseed/core": "^1.0.1",
-    "mocker-data-generator": "^2.6.6"
+    "restful-model": "^0.1.8"
   },
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
     "seed",
-    "mocker-data-generator",
+    "REST API",
     "test",
     "mock"
   ]

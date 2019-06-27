@@ -1,6 +1,6 @@
 {
   "name": "@superseed/mongodb",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,17 +8,17 @@
   },
   "author": "",
   "license": "apache-2.0",
-  "homepage": "https://github.com/Natural-Intelligence/super-seed",
-  "repository": "github:Natural-Intelligence/super-seed",
+  "homepage": "https://github.com/Natural-Intelligence/superseed",
+  "repository": "github:Natural-Intelligence/superseed",
+  "bugs": {
+    "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Amongodb"
+  },
   "dependencies": {
     "@superseed/core": "^1.0.1",
     "mongodb": "^3.1.10"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "bugs": {
-    "url": "https://github.com/Natural-Intelligence/super-seed/issues"
   },
   "keywords": [
     "seed",

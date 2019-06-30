@@ -1,5 +1,7 @@
 const {describe, it} = require('mocha');
 const {expect} = require('chai');
+const {MongoMemoryServer} = require('mongodb-memory-server');
+
 
 const {Seeder, SeedJob} = require('../../packages/superseed');
 const MongoDBSource = require('../../packages/superseed-mongodb');
@@ -14,16 +16,23 @@ class MyGenerator extends BaseMockGenerator {
 }
 
 describe('seeder', () => {
+  let mongod, uri, port, dbPath, dbName;
+
+  before(async () => {
+    mongod = new MongoMemoryServer();
+    uri = await mongod.getConnectionString();
+    port = await mongod.getPort();
+    dbPath = await mongod.getDbPath();
+    dbName = await mongod.getDbName();
+  });
+
+
+  after(() => mongod.stop());
+
   it('must save seed to db', async () => {
     const mongodbSource = new MongoDBSource({
-      url: 'mongodb://localhost:27017',// todo: use docker
+      url: uri,
       dbName: 'test-seeds',
-      options: {
-        auth: {
-          user: 'dev_db_user',
-          password: 'testingisgood'
-        }
-      }
     });
 
     const peopleSeeder = new SeedJob('users', new MyGenerator(), mongodbSource.collection('users'));

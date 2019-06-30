@@ -19,7 +19,7 @@
     "mongoose-dummy": "^1.0.8"
   },
   "peerDependencies": {
-    "@superseed/core": "1.x"
+    "@superseed/superseed": "1.x"
   },
   "publishConfig": {
     "access": "public"

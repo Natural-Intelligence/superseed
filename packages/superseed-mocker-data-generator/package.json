@@ -18,7 +18,7 @@
     "mocker-data-generator": "^2.6.6"
   },
   "peerDependencies": {
-    "@superseed/core": "1.x"
+    "@superseed/superseed": "1.x"
   },
   "publishConfig": {
     "access": "public"

@@ -24,7 +24,13 @@ class CustomSeeded extends BasedataSource {
 }
 const personSchema = {
   id: ObjectId,
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    lowercase: true,
+    trim: true
+  }, 
+  lastName: {
     type: String,
     required: true,
     lowercase: true,
@@ -50,11 +56,12 @@ const catSchema = {
     lowercase: true,
     trim: true
   },
+  fullName: String,
   ownerId: ObjectId
 };
 
 const options = {
-  ignore: ['_id', 'id']
+  ignore: ['_id', 'id'],  
 };
 
 const catOptions = {
@@ -62,7 +69,11 @@ const catOptions = {
     generator: 'hasOne',
     target: 'users',
     foreignField:'id'
-  }
+  },
+  fullName: function(db, object)  {
+      const {lastName} = db.users.find(({id}) => id === object.ownerId);
+      return `${object.name} ${lastName}`
+    }
 };
 
 const personSeedJob = new SeedJob(
@@ -90,8 +101,8 @@ seeder.seed().then(data => {
 ## Methods
 ### constructor(ModelName, mongooseSchema, options)
  * ModelName: Used when a creating a mongoose model.
- * mongooseSchema: A mongoose schem
- * options: defines options per field. An otion for a field must have at least one property, *generator*. The following generators are supported:
+ * mongooseSchema: A mongoose schema
+ * options: defines options per field. An option for a field must have at least one property, *generator*. The following generators are supported:
      
     * *hasOne*:
         
@@ -109,5 +120,9 @@ seeder.seed().then(data => {
 
     * _email_
     * _phone_
+    * a function: a function that receives as arguments 
+      - db: all the seeds created grouped by type
+      - object: the current mock object being populated with values
+      Another way to access these values is via this.db and this.object. Not that accessing via this would not work for arrow functions.
 
 

@@ -1,5 +1,6 @@
 const dummy = require('mongoose-dummy');
 const mongoose = require('mongoose');
+const set = require('lodash.set');
 const {
   BaseMockGenerator,
   generators: {hasMany, hasOne},
@@ -28,6 +29,8 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
     Object.keys(this.options).forEach((field) => {
       if (typeof this.options[field].generator === 'function') {
         generateLater.push(field);
+        this.options.ignore = this.options.ignore || [];
+        this.options.ignore.push(field);
       } else if (this.options[field].generator === 'hasMany') {
         options.force[field] = hasMany(db, this.options[field]);
       } else if (this.options[field].generator === 'hasOne') {
@@ -40,35 +43,35 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
         });
       }
     });
-    generateLater.forEach(field => {
-      if (paths[field]) {
-        if (paths[field].type === 'Array') {
-          options.force[field] = [];
-          const max = this.options[field].max || 5;
-          const min = this.options[field].min || 1;
-          const randomNum = Math.floor((Math.random() * max) + min);
-          for (let i = 0; i < randomNum; i++) {
-            options.force[field].push(this.options[field].generator.call({db, object: options.force}, {
-              db,
-              object: options.force
-            }));
-          }
-        } else {
-          options.force[field] = this.options[field].generator.call({db, object: options.force}, {
-            db,
-            object: options.force
-          });
-        }
-      }
-    });
-    return options;
+
+    return [options, generateLater];
   }
 
   generate(db, count) {
-    const data = [...new Array(count).keys()].map(() => {
-      const options = this.buildOptions(db);
-      return dummy(this.model, options);
-    });
+    const data = [...new Array(count).keys()].map(() => this.generateMock(db));
     return data;
+  }
+
+  generateMock(db) {
+    const paths = dummy.getPaths(this.mongooseSchema);
+    const [options, generateLater] = this.buildOptions(db);
+    const mockObject = dummy(this.model, options);
+
+    generateLater.forEach((field) => {
+      let fieldValue;
+      if (paths[field].type === 'Array') {
+        fieldValue = [];
+        const max = this.options[field].max || 5;
+        const min = this.options[field].min || 1;
+        const randomNum = Math.floor((Math.random() * max) + min);
+        for (let i = 0; i < randomNum; i++) {
+          fieldValue.push(this.options[field].generator.call({db, object: mockObject}, db, mockObject));
+        }
+      } else {
+        fieldValue = this.options[field].generator.call({db, object: mockObject}, db, mockObject);
+      }
+      set(mockObject, field, fieldValue);
+    });
+    return mockObject;
   }
 };

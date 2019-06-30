@@ -7,7 +7,13 @@ const {
 
 const personSchema = {
   id: ObjectId,
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    lowercase: true,
+    trim: true
+  },
+  lastName: {
     type: String,
     required: true,
     lowercase: true,
@@ -36,6 +42,7 @@ const catSchema = {
     lowercase: true,
     trim: true
   },
+  fullName: String,
   ownerId: ObjectId
 };
 
@@ -49,6 +56,12 @@ const catOptions = {
     generator: 'hasOne',
     target: 'users',
     foreignField: 'id'
+  },
+  fullName: {
+    generator:  (db, object) => {
+      const {lastName} = db.users.find(({id}) => id === object.ownerId);
+      return `${object.name} ${lastName}`
+    }
   }
 };
 
@@ -69,6 +82,7 @@ describe('MongooseMockGenerator test', () => {
     const userData = generator.generate({}, 1);
     const data = catGenerator.generate({users: userData}, 1);
     expect(data.length).to.eql(1);
+    expect(data[0].fullName).to.eql(`${data[0].name} ${userData[0].lastName}`);
     expect(data[0].ownerId).to.eql(userData[0].id);
   });
 
@@ -115,7 +129,7 @@ describe('MongooseMockGenerator test', () => {
       expect(mock.names[0]).to.eql('a');
       console.log(mock);
     });
-   // mongoose-dummy does not support embedded properties
+    // mongoose-dummy does not support embedded properties
     it.skip('must handle nested level', () => {
       const nested = new Schema({name: String});
       const schema = {info: nested};

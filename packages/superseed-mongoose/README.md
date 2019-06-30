@@ -70,10 +70,12 @@ const catOptions = {
     target: 'users',
     foreignField:'id'
   },
-  fullName: function(db, object)  {
+  fullName: {
+    generator:  (db, object) => {
       const {lastName} = db.users.find(({id}) => id === object.ownerId);
       return `${object.name} ${lastName}`
     }
+  }
 };
 
 const personSeedJob = new SeedJob(

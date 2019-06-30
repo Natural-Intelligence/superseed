@@ -4,15 +4,22 @@ module.exports = class SeedJob {
         this.mockGenerator = mockGenerator;
         this.seeder = seeder;
     }
-    
+
     getKey(){
         return this.key;
     }
 
-    generateSeeds(db, count) {
-        const data = this.mockGenerator.generate(db, count);
-        return data;
+  generateSeeds(db, options) {
+    const {count , staticFields , getStaticFields} = options;
+    if (count && getStaticFields) {
+      return (new Array(count)).map(() => this.mockGenerator.generateMock(db, getStaticFields(db)))
+    }else if (count) {
+      return (new Array(count)).map(() => this.mockGenerator.generateMock(db, {}))
+    } else if (staticFields) {
+      return staticFields.map(() => this.mockGenerator.generateMock(db, {}));
     }
+    throw new Error('Invalid options');
+  }
 
     createSeeds(models){
         return this.seeder.createSeeds(models);
@@ -21,4 +28,4 @@ module.exports = class SeedJob {
     deleteSeeds(models) {
       return this.seeder.deleteSeeds(models);
     }
-}
+};

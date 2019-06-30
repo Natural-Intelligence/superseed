@@ -17,9 +17,9 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
     this.model = mongoose.model(this.modelName, this.mongooseSchema);
   }
 
-  buildOptions(db) {
+  buildOptions(db, staticFields) {
     const options = {
-      force: {},
+      force: staticFields,
       custom: {
         email: [], phone: [], address: [], password: [],
       },
@@ -46,12 +46,7 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
     return [options, generateLater];
   }
 
-  generate(db, count) {
-    const data = [...new Array(count).keys()].map(() => this.generateMock(db));
-    return data;
-  }
-
-  generateMock(db) {
+  generateMock(db, staticFields = {}) {
     const paths = dummy.getPaths(this.mongooseSchema);
     const [options, generateLater] = this.buildOptions(db);
     const mockObject = dummy(this.model, options);

@@ -1,5 +1,5 @@
 module.exports = class BaseMockGenerator {
-    generate(db, count) {
+    generateMock(db, staticFields = {}) {
       throw new Error('Unimplemented Method');
     }
 };

@@ -1,6 +1,6 @@
 {
   "name": "@superseed/superseed",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Asuperseed"
   },
   "peerDependencies": {
-    "@superseed/core": "1.x"
+    "@superseed/core": "2.x"
   },
   "license": "apache-2.0",
   "publishConfig": {

@@ -8,10 +8,10 @@ const MongoDBSource = require('../../packages/superseed-mongodb');
 const {BaseMockGenerator} = require('../../packages/superseed-core');
 
 class MyGenerator extends BaseMockGenerator {
-  generate(db, count) {
-    return [...Array(count).keys()].map(() => ({
+  generateMock() {
+    return {
       name: 'test'
-    }));
+    };
   }
 }
 
@@ -38,7 +38,7 @@ describe('seeder', () => {
     const peopleSeeder = new SeedJob('users', new MyGenerator(), mongodbSource.collection('users'));
 
     const seeder = new Seeder();
-    seeder.addJob(peopleSeeder, 1);
+    seeder.addJob(peopleSeeder, {count: 1});
     const data = await seeder.seed();
     expect(data.users[0].name).to.eql('test');
     expect(data.users[0]).to.haveOwnProperty('_id');

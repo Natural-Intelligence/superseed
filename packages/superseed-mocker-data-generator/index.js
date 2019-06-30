@@ -13,12 +13,6 @@ class MockDataGeneratorSchema extends BaseMockGenerator {
     return this.schema;
   }
 
-  /**
-   * @override
-   * @param db
-   * @param staticFields
-   * @returns {*}
-   */
   generateMock(db, staticFields = {}) {
     const schemaDef = Object.assign({}, this.schema);
     Object.entries(staticFields).forEach(([field, value]) => {

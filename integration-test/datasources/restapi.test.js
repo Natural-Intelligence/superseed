@@ -21,10 +21,10 @@ const myEntity = myService.defineEntity({
 });
 
 class MyGenerator extends BaseMockGenerator {
-  generate(db, count) {
-    return [...Array(count).keys()].map(() => ({
+  generateMock() {
+    return {
       name: 'test'
-    }));
+    };
   }
 }
 
@@ -39,7 +39,7 @@ describe('seeder', () => {
   it('must save seed to db', async () => {
     const peopleSeeder = new SeedJob('users', new MyGenerator(), myEntity);
     const seeder = new Seeder();
-    seeder.addJob(peopleSeeder, 1);
+    seeder.addJob(peopleSeeder, {count:1});
     const data = await seeder.seed();
     expect(data).to.eql({users: [{name: 'test', id: 'id'}]});
   });

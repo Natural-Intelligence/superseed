@@ -48,7 +48,7 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
 
   generateMock(db, staticFields = {}) {
     const paths = dummy.getPaths(this.mongooseSchema);
-    const [options, generateLater] = this.buildOptions(db);
+    const [options, generateLater] = this.buildOptions(db, staticFields);
     const mockObject = dummy(this.model, options);
 
     generateLater.forEach((field) => {

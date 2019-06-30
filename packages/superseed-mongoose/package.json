@@ -30,5 +30,6 @@
     "mongoose",
     "test",
     "mock"
-  ]
+  ],
+  "gitHead": "90344cc10f1ddd76cdd91c04bca35e853c6f4890"
 }

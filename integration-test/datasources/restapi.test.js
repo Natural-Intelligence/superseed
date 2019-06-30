@@ -2,9 +2,9 @@ const {describe, it} = require('mocha');
 const {expect} = require('chai');
 const nock = require('nock');
 
-const {Seeder, SeedJob} = require('../../packages/super-seed');
-const APISource = require('../../packages/super-seed-restapi');
-const {BaseMockGenerator} = require('../../packages/super-seed-core');
+const {Seeder, SeedJob} = require('../../packages/superseed');
+const APISource = require('../../packages/superseed-restapi');
+const {BaseMockGenerator} = require('../../packages/superseed-core');
 
 const responseHandler = response => {
    return response;

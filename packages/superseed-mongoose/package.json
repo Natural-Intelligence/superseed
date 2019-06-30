@@ -14,13 +14,13 @@
     "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Amongoose"
   },
   "dependencies": {
-    "@superseed/core": "^2.0.0",
+    "@superseed/core": "^2.0.0-beta.0",
     "lodash.set": "^4.3.2",
     "mongoose": "4.7.7",
     "mongoose-dummy": "^1.0.8"
   },
   "peerDependencies": {
-    "@superseed/superseed": "2.x"
+    "@superseed/superseed": "^2.0.0-beta.0"
   },
   "publishConfig": {
     "access": "public"

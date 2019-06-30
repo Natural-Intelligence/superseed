@@ -1,6 +1,6 @@
 {
   "name": "@superseed/superseed",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,9 @@
   "repository": "github:Natural-Intelligence/superseed",
   "bugs": {
     "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Asuperseed"
+  },
+  "peerDependencies": {
+    "@superseed/core": "1.x"
   },
   "license": "apache-2.0",
   "publishConfig": {

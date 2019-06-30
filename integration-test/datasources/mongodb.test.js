@@ -1,9 +1,9 @@
 const {describe, it} = require('mocha');
 const {expect} = require('chai');
 
-const {Seeder, SeedJob} = require('../../packages/super-seed');
-const MongoDBSource = require('../../packages/super-seed-mongodb');
-const {BaseMockGenerator} = require('../../packages/super-seed-core');
+const {Seeder, SeedJob} = require('../../packages/superseed');
+const MongoDBSource = require('../../packages/superseed-mongodb');
+const {BaseMockGenerator} = require('../../packages/superseed-core');
 
 class MyGenerator extends BaseMockGenerator {
   generate(db, count) {

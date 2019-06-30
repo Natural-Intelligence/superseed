@@ -1,6 +1,6 @@
-# super-seed-mocker-data-generator
+# superseed mocker-data-generator
 
-A super-seed module that allows support for MochGenerators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) schema
+A super-seed module that allows support for MockGenerators using [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) schema
 
 # Install
 

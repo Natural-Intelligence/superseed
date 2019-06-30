@@ -1,11 +1,12 @@
 const hasOne = (db, config) => {
-  const {target, foreignField, exclude = []} = config;
+  const {target, foreignField, exclude = [], get, index: itemIndex} = config;
   let entity = null;
   if (exclude.length) {
     var dbString = JSON.stringify(exclude);
     for (var i = 0; i < db[target].length; i++) {
       var item = db[target][i];
-      if (dbString.indexOf(JSON.stringify(foreignField ? item[foreignField] : item)) < 0) {
+      const value = get ? get(item, itemIndex) : foreignField ? item[foreignField] : item;
+      if (dbString.indexOf(JSON.stringify(value)) < 0) {
         entity = item;
         break;
       }
@@ -17,11 +18,11 @@ const hasOne = (db, config) => {
     const index = Math.floor(Math.random() * Math.floor(db[target].length));
     entity = db[target][index];
   }
-  return foreignField ? entity[foreignField] : entity;
+  return get ? get(entity, itemIndex) : foreignField ? entity[foreignField] : entity;
 };
 
 const hasMany = (db, config) => {
-  const {target, foreignField, unique, min, max, amount} = config;
+  const {target, foreignField, unique, min, max, amount, get} = config;
   let number;
   if (amount) {
     number = amount;
@@ -31,14 +32,15 @@ const hasMany = (db, config) => {
 
   const newConfig = {
     target,
-    foreignField
+    foreignField,
+    get
   };
   if (unique) {
-    return Array.from(new Array(number)).reduce(acc => {
-      return acc.concat([hasOne(db, Object.assign({exclude: acc}, newConfig))]);
+    return Array.from(new Array(number)).reduce((acc, num, index) => {
+      return acc.concat([hasOne(db, Object.assign({exclude: acc, index}, newConfig))]);
     }, []);
   }
-  return Array.from(new Array(number)).map(() => hasOne(db, newConfig));
+  return Array.from(new Array(number)).map((num, index) => hasOne(db, Object.assign({index}, newConfig)));
 };
 
 module.exports = {

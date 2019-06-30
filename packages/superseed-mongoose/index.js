@@ -25,7 +25,6 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
       },
     };
     const generateLater = [];
-    const paths = dummy.getPaths(this.mongooseSchema);
     Object.keys(this.options).forEach((field) => {
       if (typeof this.options[field].generator === 'function') {
         generateLater.push(field);
@@ -58,19 +57,21 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
     const mockObject = dummy(this.model, options);
 
     generateLater.forEach((field) => {
-      let fieldValue;
-      if (paths[field].type === 'Array') {
-        fieldValue = [];
-        const max = this.options[field].max || 5;
-        const min = this.options[field].min || 1;
-        const randomNum = Math.floor((Math.random() * max) + min);
-        for (let i = 0; i < randomNum; i++) {
-          fieldValue.push(this.options[field].generator.call({db, object: mockObject}, db, mockObject));
+      if (paths[field]) {
+        let fieldValue;
+        if (paths[field].type === 'Array') {
+          fieldValue = [];
+          const max = this.options[field].max || 5;
+          const min = this.options[field].min || 1;
+          const randomNum = Math.floor((Math.random() * max) + min);
+          for (let i = 0; i < randomNum; i++) {
+            fieldValue.push(this.options[field].generator.call({db, object: mockObject}, db, mockObject));
+          }
+        } else {
+          fieldValue = this.options[field].generator.call({db, object: mockObject}, db, mockObject);
         }
-      } else {
-        fieldValue = this.options[field].generator.call({db, object: mockObject}, db, mockObject);
+        set(mockObject, field, fieldValue);
       }
-      set(mockObject, field, fieldValue);
     });
     return mockObject;
   }

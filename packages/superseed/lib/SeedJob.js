@@ -10,13 +10,16 @@ module.exports = class SeedJob {
     }
 
   generateSeeds(db, options) {
-    const {count , staticFields , getStaticFields} = options;
+    const {count , staticFieldData , getStaticFieldData, getStaticFields} = options;
+
     if (count && getStaticFields) {
       return Array.from(new Array(count)).map(() => this.mockGenerator.generateMock(db, getStaticFields(db)))
     } else if (count) {
       return Array.from(new Array(count)).map(() => this.mockGenerator.generateMock(db, {}))
-    } else if (staticFields) {
-      return staticFields.map((fields) => this.mockGenerator.generateMock(db, fields));
+    } else if (staticFieldData) {
+      return staticFieldData.map((staticFields) => this.mockGenerator.generateMock(db, staticFields));
+    } else if (getStaticFieldData) {
+      return getStaticFieldData(db).map((staticFields) => this.mockGenerator.generateMock(db, staticFields));
     }
     throw new Error('Invalid options');
   }

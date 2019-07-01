@@ -33,9 +33,19 @@ describe('SeedJob', () => {
     expect(result.entities.length).to.eql(10)
   });
 
-  it('must generate using staticFields', async () => {
+  it('must generate using staticFieldData', async () => {
     const seeder = new Seeder();
-    seeder.addJob(job, {staticFields: [{name: "Koffi"}, {name: "Moshe"}, {name: "Ahmed"}]});
+    seeder.addJob(job, {staticFieldData: [{name: "Koffi"}, {name: "Moshe"}, {name: "Ahmed"}]});
+    const result = await seeder.seed();
+    expect(result.entities.length).to.eql(3);
+    ['Koffi','Moshe','Ahmed'].forEach((name,index) => {
+      expect(result.entities[index].name).to.eql(name);
+    });
+  });
+
+  it('must generate using getStaticFieldData', async () => {
+    const seeder = new Seeder();
+    seeder.addJob(job, {getStaticFieldData: () => [{name: "Koffi"}, {name: "Moshe"}, {name: "Ahmed"}]});
     const result = await seeder.seed();
     expect(result.entities.length).to.eql(3);
     ['Koffi','Moshe','Ahmed'].forEach((name,index) => {

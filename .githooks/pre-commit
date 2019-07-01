@@ -1,0 +1,10 @@
+#! /bin/sh
+
+echo 'Running lint test'
+npm run lint
+
+RETVAL=$?
+
+if [ $RETVAL -ne 0 ]; then
+ exit 1
+fi

@@ -1,6 +1,6 @@
 {
   "name": "@superseed/mongoose",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "",
   "main": "index.js",
   "scripts": {

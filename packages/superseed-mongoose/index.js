@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const set = require('lodash.set');
 const {
   BaseMockGenerator,
-  generators: {hasMany, hasOne},
+  generators: { hasMany, hasOne },
 } = require('@superseed/core');
 
 // const mongooseDummyOptions = { autoDetect: false };
@@ -60,15 +60,15 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
       if (paths[field]) {
         let fieldValue;
         if (paths[field].type === 'Array') {
-          fieldValue = [];
           const max = this.options[field].max || 5;
           const min = this.options[field].min || 1;
           const randomNum = Math.floor((Math.random() * max) + min);
-          for (let i = 0; i < randomNum; i++) {
-            fieldValue.push(this.options[field].generator.call({db, object: mockObject}, db, mockObject));
-          }
+          fieldValue = Array.from(new Array(randomNum))
+            .map(() => this.options[field].generator
+              .call({ db, object: mockObject }, db, mockObject));
         } else {
-          fieldValue = this.options[field].generator.call({db, object: mockObject}, db, mockObject);
+          fieldValue = this.options[field].generator
+            .call({ db, object: mockObject }, db, mockObject);
         }
         set(mockObject, field, fieldValue);
       }

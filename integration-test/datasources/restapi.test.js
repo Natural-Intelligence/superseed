@@ -17,7 +17,8 @@ const myService = new APISource({
 
 const myEntity = myService.defineEntity({
   basePath: '/entities',
-  name: 'Entity'
+  name: 'Entity',
+  idField: 'entityId'
 });
 
 class MyGenerator extends BaseMockGenerator {
@@ -28,19 +29,27 @@ class MyGenerator extends BaseMockGenerator {
   }
 }
 
-describe('seeder', () => {
+describe('API seeder tests', () => {
   before(() => {
     nock('http://localhost:1234/api/v1')
       .post('/entities', {name: 'test'})
-        .reply(201, { name: 'test', id: 'id' })
+        .reply(201, { name: 'test', entityId: 1 })
+        .log((data) => console.log(data));
+
+    nock('http://localhost:1234/api/v1')
+      .delete('/entities/1')
+        .reply(200, { name: 'test', entityId: 1, deleted: true })
         .log((data) => console.log(data));
   });
 
-  it('must save seed to db', async () => {
+  it('must save seed to via API', async () => {
     const peopleSeeder = new SeedJob('users', new MyGenerator(), myEntity);
     const seeder = new Seeder();
     seeder.addJob(peopleSeeder, {count:1});
     const data = await seeder.seed();
-    expect(data).to.eql({users: [{name: 'test', id: 'id'}]});
+    expect(data).to.eql({users: [{name: 'test', entityId: 1}]});
+
+    const deleteRes = await seeder.unseed();
+    expect(deleteRes.users[0].deleted).to.eql(true);
   });
 });

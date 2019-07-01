@@ -4,14 +4,22 @@ const { BaseDataSource } = require('@superseed/core');
 const { fetchRequest, fetchResponse } = RestService.defaultMiddlewares;
 
 class APISeeder extends BaseDataSource {
-  constructor(model) {
+  constructor(model, {idField} = {}) {
     super();
     this.model = model;
+    this.idField = idField;
   }
 
   async createSeeds(seeds) {
     const saved = await Promise.all(seeds.map(seed => this.model.create(seed)));
     return saved;
+  }
+
+  async deleteSeeds(seeds) {
+     const idField = this.idField;
+    return Promise.all(seeds.map((seed) => {
+      return this.model.delete({id: seed[idField]});
+    }));
   }
 }
 
@@ -33,8 +41,8 @@ module.exports = class APISource {
   }
 
   defineEntity(options) {
-    const { basePath, name = 'UNKNOWN' } = options;
+    const { basePath, name = 'UNKNOWN', idField = 'id' } = options;
     const model = this.service.registerModel(name, basePath);
-    return new APISeeder(model);
+    return new APISeeder(model, {idField});
   }
 };

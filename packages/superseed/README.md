@@ -60,22 +60,31 @@ const data = await seeder.seed();
 When adding a seed job to a seed the following option values can be used
 
 ## count
-Define the number of seeds to generate
+Define the number of seeds to create.
 ```js
 // Example
 seeder.addJob(job, {count: 2});
 seeder.seed();// would generate 2 mock
 ```
 
-## staticFields
-Define custom field value for generated seeds
+## staticFieldData
+Define Static data for seed. If supplied count is ignored.
 ```js
 // Example:
-seeder.addJob(job, {staticFields: [{name: 'John'}, {name: 'Moshe'}]});
+seeder.addJob(job, {staticFieldData: [{name: 'John'}, {name: 'Moshe'}]});
 seeder.seed();// would generate 2 mock object with names John and Moshe respectively
 ```
+
+## getStaticFieldData
+A callback that returns static data for seed. If supplied count is ignored. Is called per  seed job.
+```js
+// Example:
+seeder.addJob(job, {getStaticFieldData: () => [{name: 'John'}, {name: 'Moshe'}]});
+seeder.seed();// would generate 2 mock object with names John and Moshe respectively
+```
+
 ## geStaticFields (with count)
-Define a callback for custom field value for generated seeds
+A callback that returns static data per mock. Is called per mock.
 ```js
 // Example:
 seeder.addJob(job, {count: 2, geStaticFields: (db) => ({name: db.users[0].name}) });

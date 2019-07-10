@@ -58,7 +58,7 @@ const catOptions = {
     foreignField: 'id'
   },
   fullName: {
-    generator:  (db, object) => {
+    generator: (db, object) => {
       const {lastName} = db.users.find(({id}) => id === object.ownerId);
       return `${object.name} ${lastName}`
     }
@@ -69,8 +69,7 @@ describe('MongooseMockGenerator test', () => {
   const generator = new MongooseMockGenerator('User', new Schema(personSchema), options);
   const catGenerator = new MongooseMockGenerator('Cat', new Schema(catSchema), catOptions);
   it('simple test', () => {
-    const data = generator.generate({}, 2);
-    expect(data.length).to.eql(2);
+    const data = [generator.generateMock({})];
     data.forEach(item => {
       expect(item).to.have.property('firstName');
       expect(item).to.have.property('email');
@@ -78,18 +77,24 @@ describe('MongooseMockGenerator test', () => {
     });
   });
 
+  it('staticFields test', () => {
+    const generator = new MongooseMockGenerator('People', new Schema(personSchema), options);
+    const item = generator.generateMock({}, {firstName: 'name', email: 'test@mail.com'});
+    expect(item.firstName).to.eql('name');
+    expect(item.email).to.eql('test@mail.com');
+    expect(['Male', 'Female'].includes(item.gender)).to.eql(true);
+  });
+
   it('hasOne', () => {
-    const userData = generator.generate({}, 1);
-    const data = catGenerator.generate({users: userData}, 1);
-    expect(data.length).to.eql(1);
+    const userData = [generator.generateMock({})];
+    const data = [catGenerator.generateMock({users: userData})];
     expect(data[0].fullName).to.eql(`${data[0].name} ${userData[0].lastName}`);
     expect(data[0].ownerId).to.eql(userData[0].id);
   });
 
   it('email', () => {
-    const data = generator.generate({}, 1);
-    expect(data.length).to.eql(1);
-    const email = data[0].contact_us;
+    const data = generator.generateMock({});
+    const email = data.contact_us;
     expect(/[\w]+\@[\w]+.[\w]+/.test(email)).to.eql(true);
   });
 
@@ -104,10 +109,9 @@ describe('MongooseMockGenerator test', () => {
         }
       };
       const generator = new MongooseMockGenerator('Person', new Schema(schema), options);
-      const [mock] = generator.generate({}, 1);
+      const mock = generator.generateMock({});
 
       expect(mock).to.have.property('title');
-      console.log(mock);
     });
 
     it('must handle top level array', () => {
@@ -123,11 +127,10 @@ describe('MongooseMockGenerator test', () => {
         }
       };
       const generator = new MongooseMockGenerator('NameList', new Schema(schema), options);
-      const [mock] = generator.generate({}, 1);
+      const mock = generator.generateMock({});
 
       expect(mock.names.length > 0).to.eql(true);
       expect(mock.names[0]).to.eql('a');
-      console.log(mock);
     });
     // mongoose-dummy does not support embedded properties
     it.skip('must handle embedded level', () => {
@@ -141,7 +144,7 @@ describe('MongooseMockGenerator test', () => {
         }
       };
       const generator = new MongooseMockGenerator('Person', new Schema(schema), options);
-      const [mock] = generator.generate({}, 1);
+      const mock = generator.generateMock({});
 
       expect(mock.info).to.have.property('name');
     });
@@ -156,7 +159,7 @@ describe('MongooseMockGenerator test', () => {
         }
       };
       const generator = new MongooseMockGenerator('Human', new Schema(schema), options);
-      const [mock] = generator.generate({}, 1);
+      const mock = generator.generateMock({});
 
       expect(mock.info).to.have.property('name');
     });
@@ -173,11 +176,9 @@ describe('MongooseMockGenerator test', () => {
         }
       };
       const generator = new MongooseMockGenerator('CustomersInfo', new Schema(schema), options);
-      const mocks = generator.generate({}, 2);
-      mocks.forEach(mock => {
-        mock.customers.forEach(customer => {
-          expect(customer.name).to.eql('same');
-        });
+      const mock = generator.generateMock({});
+      mock.customers.forEach(customer => {
+        expect(customer.name).to.eql('same');
       });
     });
 
@@ -191,12 +192,10 @@ describe('MongooseMockGenerator test', () => {
         }
       };
       const generator = new MongooseMockGenerator('CustomerNames', new Schema(schema), options);
-      const mocks = generator.generate({}, 2);
-      mocks.forEach(mock => {
-        expect(Array.isArray(mock.customers)).to.eql(true);
-        mock.customers.forEach(customer => {
-          expect(typeof customer).to.eql('string');
-        });
+      const mock = generator.generateMock({});
+      expect(Array.isArray(mock.customers)).to.eql(true);
+      mock.customers.forEach(customer => {
+        expect(typeof customer).to.eql('string');
       });
     });
   });

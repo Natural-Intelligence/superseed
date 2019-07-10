@@ -17,16 +17,18 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
     this.model = mongoose.model(this.modelName, this.mongooseSchema);
   }
 
-  buildOptions(db) {
+  buildOptions(db, staticFields) {
     const options = {
-      force: {},
+      force: staticFields,
       custom: {
         email: [], phone: [], address: [], password: [],
       },
     };
     const generateLater = [];
     Object.keys(this.options).forEach((field) => {
-      if (typeof this.options[field].generator === 'function') {
+      if (options.force[field]) {
+        // skip
+      } else if (typeof this.options[field].generator === 'function') {
         generateLater.push(field);
         this.options.ignore = this.options.ignore || [];
         this.options.ignore.push(field);
@@ -46,14 +48,9 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
     return [options, generateLater];
   }
 
-  generate(db, count) {
-    const data = [...new Array(count).keys()].map(() => this.generateMock(db));
-    return data;
-  }
-
-  generateMock(db) {
+  generateMock(db, staticFields = {}) {
     const paths = dummy.getPaths(this.mongooseSchema);
-    const [options, generateLater] = this.buildOptions(db);
+    const [options, generateLater] = this.buildOptions(db, staticFields);
     const mockObject = dummy(this.model, options);
 
     generateLater.forEach((field) => {

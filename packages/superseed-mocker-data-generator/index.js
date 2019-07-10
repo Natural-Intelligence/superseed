@@ -1,5 +1,6 @@
 const { Schema } = require('mocker-data-generator');
 const { BaseMockGenerator } = require('@superseed/core');
+const set = require('lodash.set');
 
 class MockDataGeneratorSchema extends BaseMockGenerator {
   constructor(name, schema) {
@@ -12,9 +13,13 @@ class MockDataGeneratorSchema extends BaseMockGenerator {
     return this.schema;
   }
 
-  generate(db, count) {
-    const schema = new Schema(this.name, this.schema, count);
-    return schema.build(db);
+  generateMock(db, staticFields = {}) {
+    const schemaDef = Object.assign({}, this.schema);
+    Object.entries(staticFields).forEach(([field, value]) => {
+      set(schemaDef, field, { function: () => value });
+    });
+    const schema = new Schema(this.name, schemaDef, 1);
+    return schema.build(db)[0];
   }
 }
 

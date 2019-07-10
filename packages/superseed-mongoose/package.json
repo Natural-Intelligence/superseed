@@ -1,6 +1,6 @@
 {
   "name": "@superseed/mongoose",
-  "version": "1.1.9",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,13 +14,13 @@
     "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Amongoose"
   },
   "dependencies": {
-    "@superseed/core": "^1.0.1",
+    "@superseed/core": "^2.0.0",
     "lodash.set": "^4.3.2",
     "mongoose": "4.7.7",
     "mongoose-dummy": "^1.0.8"
   },
   "peerDependencies": {
-    "@superseed/superseed": "1.x"
+    "@superseed/superseed": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -30,5 +30,6 @@
     "mongoose",
     "test",
     "mock"
-  ]
+  ],
+  "gitHead": "90344cc10f1ddd76cdd91c04bca35e853c6f4890"
 }

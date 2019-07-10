@@ -44,14 +44,13 @@ describe('MockDataGeneratorSchema test', () => {
   const userGenerator = new MockDataGeneratorSchema('user', user);
   const groupGenerator = new MockDataGeneratorSchema('group', group);
   it('relation ship test', () => {
-    const data = userGenerator.generate({}, 1);
-    expect(data.length).to.eql(1);
+    const data = [userGenerator.generateMock({} )];
     data.forEach(item => {
       expect(item).to.have.property('firstName');
       expect(item).to.have.property('lastName');
     });
 
-    const groupData = groupGenerator.generate({user: data}, 2);
+    const groupData = [groupGenerator.generateMock({user: data})];
     groupData.forEach(item => {
       expect(item).to.have.property('users');
       expect(item.users).to.include.members([data[0].username]);

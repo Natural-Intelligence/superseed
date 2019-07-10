@@ -8,7 +8,7 @@ npm install @superseed/mongodb
 
 ## Usage example
 
-The Mongo DB data souce allow storage of seeds to MongoDB
+The Mongo DB data source allow storage of seeds to MongoDB
 
 *Example:*
 
@@ -18,10 +18,10 @@ const MongoDBSource = require('@superseed/mongodb');
 const {BaseMockGenerator} = require('@superseed/core');
 
 class MyGenerator extends BaseMockGenerator {
-  generate(db, count) {
-    return [...Array(count).keys()].map(() => ({
-      name: 'test'
-    }));
+  generateMock(db, staticFields) {
+    return {
+     name: 'test'
+    }
   }
 }
 

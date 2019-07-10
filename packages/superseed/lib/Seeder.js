@@ -3,10 +3,10 @@ module.exports = class Seeder {
     this.models = {};
   }
 
-  addJob(seedJob, count) {
+  addJob(seedJob, options) {
     this.models[seedJob.getKey()] = {
       generateSeeds: (db) => {
-        return seedJob.generateSeeds(db, count);
+        return seedJob.generateSeeds(db, options);
       },
       createSeeds: models => {
         return seedJob.createSeeds(models);

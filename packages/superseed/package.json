@@ -1,6 +1,6 @@
 {
   "name": "@superseed/superseed",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Asuperseed"
   },
   "peerDependencies": {
-    "@superseed/core": "^2.0.0-beta.0"
+    "@superseed/core": "^2.0.0"
   },
   "license": "apache-2.0",
   "publishConfig": {
@@ -25,6 +25,5 @@
     "mock",
     "mock data generation",
     "seed generation"
-  ],
-  "gitHead": "90344cc10f1ddd76cdd91c04bca35e853c6f4890"
+  ]
 }

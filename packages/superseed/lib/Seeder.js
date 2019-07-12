@@ -1,36 +1,56 @@
+const handleError = (err) => {
+  console.log(err);
+};
+
 module.exports = class Seeder {
-  constructor() {
+  constructor(db = {}, { errorHandler = handleError} = {}) {
     this.models = {};
+    this.db = db;
+    this.handleError = errorHandler;
   }
 
-  addJob(seedJob, options) {
-    this.models[seedJob.getKey()] = {
-      generateSeeds: (db) => {
-        return seedJob.generateSeeds(db, options);
-      },
-      createSeeds: models => {
-        return seedJob.createSeeds(models);
-      },
-      deleteSeeds: models => {
-        return seedJob.deleteSeeds(models);
-      }
+  defineJob(entityKey, seedJob) {
+    if(this.models[entityKey]){
+      // backward compatibility - ignore. Should throw in next major version
+      this.models[entityKey].job = seedJob;
+      return this;
+    }
+    this.models[entityKey] = {
+      job: seedJob,
+      seedOptions: []
     };
+    return this;
+  }
 
+  addSeed(entityKey, options) {
+    if(!this.models[entityKey]){
+      throw new Error(`No SeedJob defined for this entity. Please define before adding seeds`);
+    }
+    this.models[entityKey].seedOptions.push(options);
+    return this;
+  }
+
+  addJob(seedJob, options = {}) {
+    this.defineJob(seedJob.getKey(), seedJob);
+    this.addSeed(seedJob.getKey(), options);
     return this;
   }
 
   async seed() {
-    const db = {};
+    const {db} = this;
     const entityKeys = Object.keys(this.models);
     try {
       for (const modelKey of entityKeys) {
-        const modelConfig = this.models[modelKey];
+        const {seedOptions, job: seedJob} = this.models[modelKey];
         db[modelKey] = [];
-        const models = modelConfig.generateSeeds(db);
-        db[modelKey] = await modelConfig.createSeeds(models);
+        for(let options of seedOptions) {
+          const models = seedJob.generateSeeds(db, options);
+          const seeds = await seedJob.createSeeds(models);
+          db[modelKey].push(...seeds);
+        }
       }
     } catch (e) {
-      console.log('Error:', e);
+      this.handleError(e);
     }
     this.db = db;
     return db;
@@ -39,15 +59,22 @@ module.exports = class Seeder {
   async unseed() {
     const {db} = this;
     const entityKeys = Object.keys(this.models);
+    const deletedResult = {};
     try {
       for (const modelKey of entityKeys) {
         const modelConfig = this.models[modelKey];
         const models = db[modelKey];
-        db[modelKey] = await modelConfig.deleteSeeds(models);
+        deletedResult[modelKey] = await modelConfig.job.deleteSeeds(models);
       }
     } catch (e) {
-      console.log('Error:', e);
+      this.handleError(e);
     }
-    return db;
+    this.reset();
+    return deletedResult;
+  }
+
+  reset(){
+    this.db = {};
+    this.models = {};
   }
 };

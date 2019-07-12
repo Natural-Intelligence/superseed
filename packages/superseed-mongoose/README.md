@@ -104,7 +104,7 @@ seeder.seed().then(data => {
 ### constructor(ModelName, mongooseSchema, options)
  * ModelName: Used when a creating a mongoose model.
  * mongooseSchema: A mongoose schema
- * options: defines options per field. An option for a field must have at least one property, *generator*. The following generators are supported:
+ * `options` \<Object\> defines options per field. An option for a field must have at least one property, *generator*. The following generators are supported:
      
     * *hasOne*:
         
@@ -127,4 +127,7 @@ seeder.seed().then(data => {
       - object: the current mock object being populated with values
       Another way to access these values is via this.db and this.object. Not that accessing via this would not work for arrow functions.
 
+### generateMock(db, staticField)
+  * `db` \<Object\> A plain object where a *key* is the entity key and *value* is an array of entities. Is used 
+  * `staticFields` \<Object\> used to define that do not need dynamic data. The provided values would be used.   
 

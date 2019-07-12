@@ -114,7 +114,7 @@ class MyDataSources extends BaseMockGenerator {
 Arguments
  * `db` \<Object\> Original db
  * `options` \<Object\>
-   * `errorHandler` <\function\> A function for handling errors. Receives and exception as first argument
+   * `errorHandler` \<function\> A function for handling errors. Receives and exception as first argument
  
 ### addJob (seedJob)
 Defines a seed job type for an entity and add a seed job.

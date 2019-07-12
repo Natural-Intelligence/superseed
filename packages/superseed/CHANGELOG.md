@@ -1,3 +1,6 @@
+# v2.1.1 
+Documentation update
+
 # v2.1.0
 
 * Updated constructor to receive 

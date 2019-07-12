@@ -1,3 +1,7 @@
+## v2.0.0
+
+Support superseed code 2.0.0
+
 ## \>=v1.1.0 (2019-06-26)
 
 Added support of custom generator function

@@ -63,4 +63,16 @@ describe('Seeding tests', () => {
       });
     });
   });
+  describe('Seeder', () => {
+    it('must allow multiple seed jobs for the same entity', async () => {
+      const job = new SeedJob('entities', new MyGenerator(), new MyDataSource());
+
+      const seeder = new Seeder();
+      seeder.addJob(job, {count: 2});
+      seeder.addJob(job, {count: 3});
+      const db = await seeder.seed();
+
+      expect(db.entities.length).to.eql(5);
+    });
+  });
 });

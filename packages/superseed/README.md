@@ -191,8 +191,8 @@ Sample Output from previous seed
 # Mock Generators
 Mock generators generate mock data for seed.
 The mock generators below can be used when creating seed
-- [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator): Generate seeds based on (mocker-data-generator)[https://www.npmjs.com/package/mocker-data-generator] Schema.
-- [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose): Generate seeds based on  (mongoose)[https://www.npmjs.com/package/mongoose] schema. 
+- [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator): Generate seeds based on [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator] Schema.
+- [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose): Generate seeds based on [mongoose](https://www.npmjs.com/package/mongoose) schema. 
 
 ## Creating custom Mock generators
 *Example:*

@@ -1,4 +1,7 @@
-# v2.1.0
+### v2.1.1 - v2.1.2
+Documentation update
+
+### v2.1.0
 
 * Updated constructor to receive 
   * initial db
@@ -9,5 +12,5 @@
   * addSeed()
   * defineJob()
   
-# v2.0.0
+### v2.0.0
 Support superseed core 2.x 

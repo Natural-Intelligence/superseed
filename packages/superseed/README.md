@@ -1,16 +1,16 @@
 # superseed
 
-Smart seeder for NodeJS. This seeder is mock generator and data source agnostic. So you can plug and play with different mock generators and data sources.  
+Smart seeder for NodeJS. This seeder is mock generator and data source agnostic. So you can plug and play different mock generators and data sources.  
 
 ### Audience
-This package is for NodeJs users that require a simple but flexible Seeder package. This seeder was started because of the need for a flexible seeder while writing End to End and Integration tests.    
+This package is for NodeJS users that require a simple but flexible Seeder package. This seeder was started because of the need for a flexible seeder while writing End to End and Integration tests.    
 
 ### Features
 
-- Define custom mock per entity. Existing mock generators include (@superseed/mocker-data-generator)[https://www.npmjs.com/package/@superseed/mocker-data-generator] and (@superseed/mongoose)[https://www.npmjs.com/package/@superseed/mongoose]
-- Define custom data sources to feed you project need. Existing data source packages include [@superseed/mongodb](https://www.npmjs.com/package/@superseed/mongodb) and  [@superseed/restapi](https://www.npmjs.com/package/@superseed/restapi)
-
-- User data of related entities when generating seeds.
+- Define custom mock per entity. Existing mock generators include [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator) and [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose).
+- Define custom data sources to feed you project need. Existing data source packages include [@superseed/mongodb](https://www.npmjs.com/package/@superseed/mongodb) and [@superseed/restapi](https://www.npmjs.com/package/@superseed/restapi).
+- Use data of related entities when generating seeds.
+- Added API for Removing seeds after tests completion. 
 
 # Install
 

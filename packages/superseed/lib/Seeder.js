@@ -32,24 +32,19 @@ module.exports = class Seeder {
     return this;
   }
 
-  // addJob(seedJob, options = {}) {
-  //   this.defineJob(seedJob.getKey(), seedJob);
-  //   this.addSeed(seedJob.getKey(), options);
-  //   return this;
-  // }
   //   addJob(seedJob, options = {})
   //   addJob(key, mockGenerator, seeder, options)
   addJob(...args) {
-     if(typeof args[0] === 'string') {
+     if(typeof arguments[0] === 'string') {
        if(arguments.length === 4) {
-         const [key, mockGenerator,seeder, options ] = args;
+         const [key, mockGenerator,seeder, options ] = arguments;
          this.defineJob(key, new SeedJob(key, mockGenerator, seeder));
          this.addSeed(key, options);
        } else if(arguments.length === 3) {
-         const [key, mockGenerator,seeder ] = args;
+         const [key, mockGenerator,seeder ] = arguments;
          this.defineJob(key, new SeedJob(key, mockGenerator, seeder));
        }
-     } else if( args[0] instanceof SeedJob) {
+     } else if(typeof arguments[0] === SeedJob) {
        const [seedJob, options] = arguments;
        this.defineJob(seedJob.getKey(), seedJob);
        this.addSeed(seedJob.getKey(), options);

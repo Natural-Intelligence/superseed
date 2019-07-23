@@ -1,6 +1,6 @@
 # superseed
 
-Smart seeder for NodeJS. This seeder is mock generator and data source agnostic. So you can plug and play different mock generators and data sources.  
+Smart seeder for NodeJS. This seeder is mock generator and data source agnostic. Different mock generators and data sources can be mixed and matched. For example you can generate mocks using mongoose schema and save seed data in MongoDB 
 
 ### Audience
 This package is for NodeJS users that require a simple but flexible Seeder package. This seeder was started because of the need for a flexible seeder while writing End to End and Integration tests.    
@@ -8,8 +8,8 @@ This package is for NodeJS users that require a simple but flexible Seeder packa
 ### Features
 
 - Define custom mock per entity. Existing mock generators include [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator) and [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose).
-- Define custom data sources to feed you project need. Existing data source packages include [@superseed/mongodb](https://www.npmjs.com/package/@superseed/mongodb) and [@superseed/restapi](https://www.npmjs.com/package/@superseed/restapi).
-- Use data of related entities when generating seeds.
+- Define custom data sources for you project need. Existing data source packages include [@superseed/mongodb](https://www.npmjs.com/package/@superseed/mongodb) and [@superseed/restapi](https://www.npmjs.com/package/@superseed/restapi).
+- Use previously seeded data of related entities when generating seeds.
 - Added API for Removing seeds after tests completion. 
 
 # Install
@@ -19,6 +19,14 @@ npm i @superseed/superseed
 ```
 
 # Usage example (blog seeds)
+This example highlights steps to create seeds using the Seeder for the following blog entities
+- User
+- Category: has an optional parent category
+- Article: has as category, has an Author
+
+For each entity we need
+- A Mock Generator: Generates mock data
+- A Data Source: Saves the mock data to a given source (via API, File, Database etc). In the example the Data source do not persist data. 
 
 ```js
 const chance = new Chance();
@@ -26,7 +34,7 @@ const {Seeder} = require('@superseed/superseed');
 const {MockGenerator, DataSource} = require('@superseed/core');
 
 
-const randomItem = (array) => {
+const pickRandomItem = (array) => {
   const index = Math.floor(Math.random() * Math.floor(array.length));
   return array[index];
 };
@@ -49,7 +57,7 @@ const postGenerator = new MockGenerator({
     const generated = {
       title: chance.sentence(),
       body: chance.guid(),
-      authorId: randomItem(db.users).id
+      authorId: pickRandomItem(db.users).id
     };
     return Object.assign(generated, staticFields);
   }
@@ -60,7 +68,7 @@ const categoryGenerator = new MockGenerator({
     const generated = {
       name: chance.word(),
       id: chance.guid(),
-      parentId: db.categories.length ? randomItem(db.categories).id : null
+      parentId: db.categories.length ? pickRandomItem(db.categories).id : null
     };
     return Object.assign(generated, staticFields);
   }
@@ -74,7 +82,6 @@ const userSource = new DataSource({
   },
   deleteSeeds(seeds) {
     return seeds;
-    // remove seeds from storage
   }
 });
 
@@ -86,7 +93,6 @@ class CategorySource extends DataSource {
 
   deleteSeeds(seeds) {
     return seeds;
-    // remove seeds from storage
   }
 }
 
@@ -98,7 +104,6 @@ const blogSource = new DataSource({
   },
   deleteSeeds(seeds) {
     return seeds;
-    // remove seeds from storage
   }
 });
 
@@ -106,23 +111,29 @@ const blogSource = new DataSource({
 (async () => {
   // create new seeder
   const seeder = new Seeder();
-// add a seed job
+  // add a seed job
   seeder.addJob('users', userGenerator, userSource, {count: 2})
     .addJob('articles', postGenerator, blogSource, {count: 3})
     // seed top categories
     .addJob('categories', categoryGenerator, categorySource, {
-      staticFieldData: [{
-        name: 'Health',
-        parentId: null
-      }, {name: 'Fashion', parentId: null}]
+      staticFieldData: [
+        {
+          name: 'Health',
+          parentId: null
+        },
+        {
+          name: 'Fashion',
+          parentId: null
+        }
+      ]
     })
     // seed child categories (they would use the ID of already seeded top categories as parentId)
     // notice the addSeed here. addJob can be called only once per entity.
     .addSeed('categories', {count: 3});
 
-// create seeds
+  // create seeds
   const seededData = await seeder.seed();
-// delete seeds
+  // delete seeds
   await seeder.unseed()
 })();
 ```

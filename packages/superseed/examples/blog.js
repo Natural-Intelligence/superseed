@@ -8,12 +8,13 @@ const {Seeder} = require('../');
 const {MockGenerator, DataSource} = require('../../superseed-core');
 
 
-const randomItem = (array) => {
+const pickRandomItem = (array) => {
   const index = Math.floor(Math.random() * Math.floor(array.length));
   return array[index];
 };
 
-// define mock generator
+// define mock generators
+
 const userGenerator = new MockGenerator({
   generateMock(db, staticFields = {}) {
     const generated = {
@@ -30,7 +31,7 @@ const postGenerator = new MockGenerator({
     const generated = {
       title: chance.sentence(),
       body: chance.guid(),
-      authorId: randomItem(db.users).id
+      authorId: pickRandomItem(db.users).id
     };
     return Object.assign(generated, staticFields);
   }
@@ -41,7 +42,7 @@ const categoryGenerator = new MockGenerator({
     const generated = {
       name: chance.word(),
       id: chance.guid(),
-      parentId: db.categories.length ? randomItem(db.categories).id : null
+      parentId: db.categories.length ? pickRandomItem(db.categories).id : null
     };
     return Object.assign(generated, staticFields);
   }
@@ -55,7 +56,6 @@ const userSource = new DataSource({
   },
   deleteSeeds(seeds) {
     return seeds;
-    // remove seeds from storage
   }
 });
 
@@ -67,7 +67,6 @@ class CategorySource extends DataSource {
 
   deleteSeeds(seeds) {
     return seeds;
-    // remove seeds from storage
   }
 }
 
@@ -79,7 +78,6 @@ const blogSource = new DataSource({
   },
   deleteSeeds(seeds) {
     return seeds;
-    // remove seeds from storage
   }
 });
 
@@ -87,22 +85,28 @@ const blogSource = new DataSource({
 (async () => {
   // create new seeder
   const seeder = new Seeder();
-// add a seed job
+  // add a seed job
   seeder.addJob('users', userGenerator, userSource, {count: 2})
     .addJob('articles', postGenerator, blogSource, {count: 3})
     // seed top categories
     .addJob('categories', categoryGenerator, categorySource, {
-      staticFieldData: [{
-        name: 'Health',
-        parentId: null
-      }, {name: 'Fashion', parentId: null}]
+      staticFieldData: [
+        {
+          name: 'Health',
+          parentId: null
+        },
+        {
+          name: 'Fashion',
+          parentId: null
+        }
+      ]
     })
     // seed child categories (they would use the ID of already seeded top categories as parentId)
     // notice the addSeed here. addJob can be called only once per entity.
     .addSeed('categories', {count: 3});
 
-// create seeds
+  // create seeds
   const seededData = await seeder.seed();
-// delete seeds
+  // delete seeds
   await seeder.unseed()
 })();

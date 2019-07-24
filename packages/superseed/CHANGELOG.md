@@ -1,3 +1,7 @@
+### v2.1.3
+
+Fix issue #12
+
 ### v2.1.1 - v2.1.2
 Documentation update
 

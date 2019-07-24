@@ -31,6 +31,9 @@ const personSchema = {
   gender: {
     type: String,
     enum: ['Male', 'Female']
+  },
+  info: {
+    bio: String
   }
 };
 
@@ -83,6 +86,12 @@ describe('MongooseMockGenerator test', () => {
     expect(item.firstName).to.eql('name');
     expect(item.email).to.eql('test@mail.com');
     expect(['Male', 'Female'].includes(item.gender)).to.eql(true);
+  });
+
+  it('staticFields test - nested', () => {
+    const generator = new MongooseMockGenerator('Author', new Schema(personSchema), options);
+    const item = generator.generateMock({}, {info:{bio: 'blabla'}});
+    expect(item.info.bio).to.eql('blabla');
   });
 
   it('hasOne', () => {

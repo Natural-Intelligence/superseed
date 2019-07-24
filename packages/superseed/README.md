@@ -2,7 +2,7 @@
 
 A Simple and flexible seeder for generating complex seeds. This flexibility is provided by allowing  
 - the definition of custom  mock generator for generating mock data.
-- the definition a custom data source for storing you data.
+- the definition a custom data source for storing data.
 
 The seeder could then be used for generating any number of seeds for any given entity.
 

@@ -1,16 +1,25 @@
 # superseed
 
-Smart seeder for NodeJS. This seeder is mock generator and data source agnostic. Different mock generators and data sources can be mixed and matched. For example you can generate mocks using mongoose schema and save seed data in MongoDB 
+A Simple and flexible seeder for generating complex seeds. This flexibility is provided by allowing  
+- the definition of custom  mock generator for generating you mock data.
+- the definition a custom data source for saving you data.
+
+The seeder could then be used for generating any number of seeds for any given entity.
+
+This make the seeder mock generator and data source agnostic. Different mock generators and data sources can be mixed and matched. For example you can [generate mocks using mongoose schema](https://www.npmjs.com/package/@superseed/mongoose) and [save seed data in MongoDB](https://www.npmjs.com/package/@superseed/mongodb).
+
 
 ### Audience
-This package is for NodeJS users that require a simple but flexible Seeder package. This seeder was started because of the need for a flexible seeder while writing End to End and Integration tests.    
+
+This package is for projects that require a simple but flexible Seeder package. This seeder was created out of the need for a flexible seeder while writing End to End and Integration tests.    
 
 ### Features
 
 - Define custom mock per entity. Existing mock generators include [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator) and [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose).
+- Create mock using both dynamic and static fields.
 - Define custom data sources for you project need. Existing data source packages include [@superseed/mongodb](https://www.npmjs.com/package/@superseed/mongodb) and [@superseed/restapi](https://www.npmjs.com/package/@superseed/restapi).
-- Use previously seeded data of related entities when generating seeds.
-- Added API for Removing seeds after tests completion. 
+- Use previously seeded data of related entities when generating seeds. For example an entity my need a field from a previously seeded entity. 
+- Removing seeds after tests completion. 
 
 # Install
 
@@ -18,7 +27,49 @@ This package is for NodeJS users that require a simple but flexible Seeder packa
 npm i @superseed/superseed
 ```
 
-# Usage example (blog seeds)
+# Simple usage
+
+```js
+const {Seeder} = require('@superseed/superseed');
+const {MockGenerator, DataSource} = require('@superseed/core');
+
+
+// define data sources
+
+const personSource = new DataSource({
+  createSeeds(seeds) {
+    // store seed data and return saved items
+  },
+  deleteSeeds(seeds) {
+    // delete seeded data from storage and return deletion result
+  }
+});
+
+// define mock generator
+
+const personGenerator = new MockGenerator({
+  generateMock(db, staticFields = {}) {
+    const generated = {
+      name: chance.word(),
+      id: chance.guid(),
+    };
+    return Object.assign(generated, staticFields)
+  }
+});
+
+(async () => {
+  // create new seeder
+  const seeder = new Seeder();
+  // add a seed job
+  seeder.addJob('people', personGenerator, personSource, {count: 2});
+ // create seeds
+  const seededData = await seeder.seed();
+  // delete seeds
+  await seeder.unseed();
+})();
+```
+
+# Advanced Usage example (blog seeds)
 This example highlights steps to create seeds using the Seeder for the following blog entities
 - User
 - Category: has an optional parent category
@@ -26,7 +77,7 @@ This example highlights steps to create seeds using the Seeder for the following
 
 For each entity we need
 - A Mock Generator: Generates mock data
-- A Data Source: Saves the mock data to a given source (via API, File, Database etc). In the example the Data source do not persist data. 
+- A Data Source: Saves the mock data to a given source (via API, File, Database etc).
 
 ```js
 const chance = new Chance();
@@ -78,32 +129,34 @@ const categoryGenerator = new MockGenerator({
 
 const userSource = new DataSource({
   createSeeds(seeds) {
-    return seeds;
+    const seedData = seeds;// Ideally you should save seeds via API, DB or some other data source
+    return seedData;
   },
   deleteSeeds(seeds) {
-    return seeds;
+    const deletionResult = seeds;// Ideally you should delete seeds via API, in DB or other data source
+    return deletionResult;
   }
 });
 
-// via extension
-class CategorySource extends DataSource {
+const categorySource = new DataSource({
   createSeeds(seeds) {
-    return seeds;
-  }
-
+    const seedData = seeds;// Ideally you should save seeds via API, DB or some other data source
+    return seedData;
+  },
   deleteSeeds(seeds) {
-    return seeds;
+    const deletionResult = seeds;// Ideally you should delete seeds via API, in DB or other data source
+    return deletionResult;
   }
-}
-
-const categorySource = new CategorySource();
+});
 
 const blogSource = new DataSource({
   createSeeds(seeds) {
-    return seeds;
+    const seedData = seeds;// Ideally you should save seeds via API, DB or some other data source
+    return seedData;
   },
   deleteSeeds(seeds) {
-    return seeds;
+    const deletionResult = seeds;// Ideally you should delete seeds via API, in DB or other data source
+    return deletionResult;
   }
 });
 

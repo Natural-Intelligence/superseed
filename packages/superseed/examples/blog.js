@@ -52,32 +52,34 @@ const categoryGenerator = new MockGenerator({
 
 const userSource = new DataSource({
   createSeeds(seeds) {
-    return seeds;
+    const seedData = seeds;// Ideally you should save seeds via API, DB or some other data source
+    return seedData;
   },
   deleteSeeds(seeds) {
-    return seeds;
+    const deletionResult = seeds;// Ideally you should delete seeds via API, in DB or other data source
+    return deletionResult;
   }
 });
 
-// via extension
-class CategorySource extends DataSource {
+const categorySource = new DataSource({
   createSeeds(seeds) {
-    return seeds;
-  }
-
+    const seedData = seeds;// Ideally you should save seeds via API, DB or some other data source
+    return seedData;
+  },
   deleteSeeds(seeds) {
-    return seeds;
+    const deletionResult = seeds;// Ideally you should delete seeds via API, in DB or other data source
+    return deletionResult;
   }
-}
-
-const categorySource = new CategorySource();
+});
 
 const blogSource = new DataSource({
   createSeeds(seeds) {
-    return seeds;
+    const seedData = seeds;// Ideally you should save seeds via API, DB or some other data source
+    return seedData;
   },
   deleteSeeds(seeds) {
-    return seeds;
+    const deletionResult = seeds;// Ideally you should delete seeds via API, in DB or other data source
+    return deletionResult;
   }
 });
 

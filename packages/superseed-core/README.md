@@ -3,41 +3,65 @@
 This is package contains core Classes and helpers for defining custom MockGenerators nad DataSources.
 
 # Core classes
-## BaseMockGenerator
+## MockGenerator
 The base Mock generator class to extend when  defining custom generators.
  
 ### Creating a custom mock generator
 
-A mock generator must extend the BaseMockGenerator and implement the generate() method. This method generate multiple mocks based on the cound. The 
+A mock generator must extend the MockGenerator and implement the generate() method. This method generate multiple mocks based on the cound. The 
 *Example:*
 
 ```js
-const {BaseMockGenerator} = require('@supoerseed/core');
- class CustomGenerator extends BaseMockGenerator {
-  generate(db, count) {
+const {MockGenerator} = require('@supoerseed/core');
+ class CustomGenerator extends MockGenerator {
+  generateMock(db, staticFields = {}) {
    // generate some mock data
   }
 }
+const myGenerator = new CustomGenerator();
+```
+
+A simpler way is
+```js
+const myGenerator = new MockGenerator({
+  generateMock(db, staticFields = {}) {
+    // generate some mock data
+  }
+});
 ```
 
 For more examples see [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose) and [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator) 
 
-## BaseDataSource
-The base Mock generator class to extend when  defining custom data sources.
+## DataSource
+The Mock generator class to extend when defining custom data sources.
 
 ### Creating a custom data source
 *Example:*
 
 ```js
-class CustomSource extends BasedataSource {
+class CustomSource extends DataSource {
     createSeeds(seeds){
        // save seed somewhere
     }
     
     deleteSeeds() {
       // delete seed created earlier 
-    }P
+    }
 }
+const myCustomSource = new CustomSource();
+```
+
+A simplified way 
+
+```js
+const myCustomSource = new DataSource({
+  createSeeds(seeds) {
+    // save seed somewhere
+  },
+  deleteSeeds() {
+    // delete seed created earlier 
+  }
+});
 ```
 
 For more examples see [@superseed/mongodb](https://www.npmjs.com/package/@superseed/mongodb) and [@superseed/restapi](https://www.npmjs.com/package/@superseed/restapi) 

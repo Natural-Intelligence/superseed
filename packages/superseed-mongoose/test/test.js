@@ -89,7 +89,7 @@ describe('MongooseMockGenerator test', () => {
   });
 
   it('staticFields test - nested', () => {
-    const generator = new MongooseMockGenerator('People', new Schema(personSchema), options);
+    const generator = new MongooseMockGenerator('Author', new Schema(personSchema), options);
     const item = generator.generateMock({}, {info:{bio: 'blabla'}});
     expect(item.info.bio).to.eql('blabla');
   });

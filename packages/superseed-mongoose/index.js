@@ -2,6 +2,7 @@ const dummy = require('mongoose-dummy');
 const mongoose = require('mongoose');
 const set = require('lodash.set');
 const get = require('lodash.get');
+const has = require('lodash.has');
 const {
   BaseMockGenerator,
   generators: { hasMany, hasOne },
@@ -22,7 +23,7 @@ module.exports = class MongooseMockGenerator extends BaseMockGenerator {
     const paths = dummy.getPaths(this.mongooseSchema);
     const forceValues = {};
     Object.keys(paths).forEach((path) => {
-      if (get(staticFields, path)) {
+      if (has(staticFields, path)) {
         forceValues[path] = get(staticFields, path);
       }
     });

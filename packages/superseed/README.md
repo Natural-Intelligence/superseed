@@ -255,7 +255,7 @@ Sample Output from previous seed
 # Mock Generators
 Mock generators generate mock data for seed.
 The mock generators below can be used when creating seed
-- [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator): Generate seeds based on [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator] Schema.
+- [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator): Generate seeds based on [mocker-data-generator](https://www.npmjs.com/package/mocker-data-generator) Schema.
 - [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose): Generate seeds based on [mongoose](https://www.npmjs.com/package/mongoose) schema. 
 
 ## Creating custom Mock generators
@@ -340,12 +340,27 @@ Arguments
 Defines a seed job type for an entity and add a seed job.
 Arguments
  * `seedJob` \<SeedJob\> a seed job defined with SeedJob class
+ * `options` \<SeedJob\> a seed options
 
 Calling `seeder.addJob(seedJob)` Is the same as 
 
 ```js
 seeder.defineJob(seedJob.getKey(), seedJob)
 .addSeed(seedJob.getKey(), options)
+```
+### addJob (entityKey, mockGenerator, dataSource, options)
+Defines a seed job type for an entity and add a seed job.
+Arguments
+ * `entityKey` \<String\> the entity key
+ * `mockGenerator` \<MockGenerator\> 
+ * `dataSource` \<DataSource\> 
+
+Calling `seeder.addJob(entityKey, mockGenerator, dataSource, options)` Is the same as 
+
+```js
+const seedJob = new SeedJob(entityKey, mockGenerator, dataSource);
+seeder.defineJob(entityKey, seedJob)
+.addSeed(entityKey, options)
 ```
 
 ### addSeed(entityKey, options)

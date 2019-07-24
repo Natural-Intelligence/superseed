@@ -4,7 +4,7 @@ Issue fix: https://github.com/Natural-Intelligence/superseed/issues/10
 
 ### v2.0.0
 
-Support superseed code 2.0.0
+Support @superseed/core 2.0.0
 
 ### \>=v1.1.0 (2019-06-26)
 

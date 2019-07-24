@@ -1,8 +1,8 @@
 # superseed
 
 A Simple and flexible seeder for generating complex seeds. This flexibility is provided by allowing  
-- the definition of custom  mock generator for generating you mock data.
-- the definition a custom data source for saving you data.
+- the definition of custom  mock generator for generating mock data.
+- the definition a custom data source for storing you data.
 
 The seeder could then be used for generating any number of seeds for any given entity.
 
@@ -18,7 +18,7 @@ This package is for projects that require a simple but flexible Seeder package. 
 - Define custom mock per entity. Existing mock generators include [@superseed/mocker-data-generator](https://www.npmjs.com/package/@superseed/mocker-data-generator) and [@superseed/mongoose](https://www.npmjs.com/package/@superseed/mongoose).
 - Create mock using both dynamic and static fields.
 - Define custom data sources for you project need. Existing data source packages include [@superseed/mongodb](https://www.npmjs.com/package/@superseed/mongodb) and [@superseed/restapi](https://www.npmjs.com/package/@superseed/restapi).
-- Use previously seeded data of related entities when generating seeds. For example an entity my need a field from a previously seeded entity. 
+- Use previously seeded data of related entities when generating seeds. For example an entity might need a field from a previously seeded entity ([See the example of article and author below](#advanced-usage-example-blog-seeds)). 
 - Removing seeds after tests completion. 
 
 # Install

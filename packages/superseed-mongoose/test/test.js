@@ -1,6 +1,7 @@
 const MongooseMockGenerator = require('../index');
 const {expect} = require('chai');
-const {Schema} = require('mongoose');
+ const mongoose = require('mongoose');
+const {Schema} =mongoose;
 const {
   Types: {ObjectId}
 } = Schema;
@@ -69,8 +70,18 @@ const catOptions = {
 };
 
 describe('MongooseMockGenerator test', () => {
-  const generator = new MongooseMockGenerator('User', new Schema(personSchema), options);
-  const catGenerator = new MongooseMockGenerator('Cat', new Schema(catSchema), catOptions);
+  const generator = new MongooseMockGenerator(new Schema(personSchema), options);
+  const catGenerator = new MongooseMockGenerator( new Schema(catSchema), catOptions);
+  it('should allow both model & schema', () => {
+     const schema = new Schema({name: String});
+     const model = mongoose.model('thing', schema);
+     const options = {__v: {skip: true}, _id: {skip: true}};
+    const generator1 = new MongooseMockGenerator( schema,options);
+    const generator2 = new MongooseMockGenerator( model, options);
+    const [mock1, mock2] = [generator1.generateMock({}, {name: 'test'}), generator2.generateMock({}, {name: 'test'})];
+    expect(mock1).to.deep.eql(mock2);
+  });
+
   it('simple test', () => {
     const data = [generator.generateMock({})];
     data.forEach(item => {
@@ -81,7 +92,7 @@ describe('MongooseMockGenerator test', () => {
   });
 
   it('staticFields test', () => {
-    const generator = new MongooseMockGenerator('People', new Schema(personSchema), options);
+    const generator = new MongooseMockGenerator( new Schema(personSchema), options);
     const item = generator.generateMock({}, {firstName: 'name', email: 'test@mail.com'});
     expect(item.firstName).to.eql('name');
     expect(item.email).to.eql('test@mail.com');
@@ -89,7 +100,7 @@ describe('MongooseMockGenerator test', () => {
   });
 
   it('staticFields test - nested', () => {
-    const generator = new MongooseMockGenerator('Author', new Schema(personSchema), options);
+    const generator = new MongooseMockGenerator(new Schema(personSchema), options);
     const item = generator.generateMock({}, {info:{bio: 'blabla'}});
     expect(item.info.bio).to.eql('blabla');
   });
@@ -117,7 +128,7 @@ describe('MongooseMockGenerator test', () => {
           }
         }
       };
-      const generator = new MongooseMockGenerator('Person', new Schema(schema), options);
+      const generator = new MongooseMockGenerator(new Schema(schema), options);
       const mock = generator.generateMock({});
 
       expect(mock).to.have.property('title');
@@ -135,14 +146,14 @@ describe('MongooseMockGenerator test', () => {
           }
         }
       };
-      const generator = new MongooseMockGenerator('NameList', new Schema(schema), options);
+      const generator = new MongooseMockGenerator( new Schema(schema), options);
       const mock = generator.generateMock({});
 
       expect(mock.names.length > 0).to.eql(true);
       expect(mock.names[0]).to.eql('a');
     });
-    // mongoose-dummy does not support embedded properties
-    it.skip('must handle embedded level', () => {
+
+    it('must handle embedded level', () => {
       const nested = new Schema({name: String});
       const schema = {info: nested};
       const options = {
@@ -152,7 +163,7 @@ describe('MongooseMockGenerator test', () => {
           }
         }
       };
-      const generator = new MongooseMockGenerator('Person', new Schema(schema), options);
+      const generator = new MongooseMockGenerator( new Schema(schema), options);
       const mock = generator.generateMock({});
 
       expect(mock.info).to.have.property('name');
@@ -167,45 +178,10 @@ describe('MongooseMockGenerator test', () => {
           }
         }
       };
-      const generator = new MongooseMockGenerator('Human', new Schema(schema), options);
+      const generator = new MongooseMockGenerator( new Schema(schema), options);
       const mock = generator.generateMock({});
 
       expect(mock.info).to.have.property('name');
-    });
-
-
-    //TODO: make this work
-    it.skip('must handle nested object in array', () => {
-      const schema = {customers: [{name: String}]};
-      const options = {
-        "customers.name": {
-          generator: () => {
-            return 'same';
-          }
-        }
-      };
-      const generator = new MongooseMockGenerator('CustomersInfo', new Schema(schema), options);
-      const mock = generator.generateMock({});
-      mock.customers.forEach(customer => {
-        expect(customer.name).to.eql('same');
-      });
-    });
-
-    it('must handle nested string in array', () => {
-      const schema = {customers: [{type: String}]};
-      const options = {
-        "customers": {
-          generator: () => {
-            return 'axb';
-          }
-        }
-      };
-      const generator = new MongooseMockGenerator('CustomerNames', new Schema(schema), options);
-      const mock = generator.generateMock({});
-      expect(Array.isArray(mock.customers)).to.eql(true);
-      mock.customers.forEach(customer => {
-        expect(typeof customer).to.eql('string');
-      });
     });
   });
 });

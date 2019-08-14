@@ -1,4 +1,4 @@
-### 3.0.0 (2019-08-14)
+# 3.0.0 (2019-08-14)
 - Removed mongoose dependency. Package can run with version 4.x and 5.x of mongoose.
 - Replaced mongoose-dummy with fakingoose
 - Fixed issues [#15](https://github.com/Natural-Intelligence/superseed/issues/15) and [#14](https://github.com/Natural-Intelligence/superseed/issues/14)
@@ -40,19 +40,19 @@ const options = {
 };
 ```
 
-### 2.0.2
+# 2.0.2
 
 Issue fix: https://github.com/Natural-Intelligence/superseed/issues/10
 
-### 2.0.0
+# 2.0.0
 
 Support @superseed/core 2.0.0
 
-### \>=1.1.0 (2019-06-26)
+# \>=1.1.0 (2019-06-26)
 
 Added support of custom generator function
 
 
-### \>= 2.0.0 
+# \>= 2.0.0 
 
 Added support for static field when generating mocks

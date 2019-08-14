@@ -48,11 +48,7 @@ Issue fix: https://github.com/Natural-Intelligence/superseed/issues/10
 
 Support @superseed/core 2.0.0
 
-# \>=1.1.0 (2019-06-26)
+
+# 1.1.0 (2019-06-26)
 
 Added support of custom generator function
-
-
-# \>= 2.0.0 
-
-Added support for static field when generating mocks

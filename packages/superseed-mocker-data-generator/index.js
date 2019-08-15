@@ -1,8 +1,8 @@
 const { Schema } = require('mocker-data-generator');
-const { BaseMockGenerator } = require('@superseed/core');
+const { MockGenerator } = require('@superseed/core');
 const set = require('lodash.set');
 
-class MockDataGeneratorSchema extends BaseMockGenerator {
+class MockDataGeneratorSchema extends MockGenerator {
   constructor(name, schema) {
     super();
     this.schema = schema;

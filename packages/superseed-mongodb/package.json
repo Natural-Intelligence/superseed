@@ -1,6 +1,6 @@
 {
   "name": "@superseed/mongodb",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Amongodb"
   },
   "dependencies": {
-    "@superseed/core": ">=1",
+    "@superseed/core": "^2.1.1",
     "mongodb": "^3.1.10"
   },
   "publishConfig": {

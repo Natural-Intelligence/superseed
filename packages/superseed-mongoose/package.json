@@ -1,6 +1,6 @@
 {
   "name": "@superseed/mongoose",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/Natural-Intelligence/superseed/issues?q=is%3Aissue+is%3Aopen+label%3Amongoose"
   },
   "dependencies": {
-    "@superseed/core": "^2.0.0",
+    "@superseed/core": "^2.1.1",
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
     "lodash.set": "^4.3.2",

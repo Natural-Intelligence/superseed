@@ -1,6 +1,6 @@
 {
   "name": "@superseed/mocker-data-generator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "license": "apache-2.0",
   "dependencies": {
-    "@superseed/core": "^2.0.0",
+    "@superseed/core": "^2.1.1",
     "lodash.set": "^4.3.2",
     "mocker-data-generator": "^2.6.6"
   },

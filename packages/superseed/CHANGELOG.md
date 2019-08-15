@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.6](https://github.com/Natural-Intelligence/superseed/compare/@superseed/superseed@2.1.5...@superseed/superseed@2.1.6) (2019-08-15)
+
+**Note:** Version bump only for package @superseed/superseed
+
+
+
+
+
 ## 2.1.4 - 2.1.5 (2019-08-15)
 
 **Note:** Version bump only for package @superseed/superseed

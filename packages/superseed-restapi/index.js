@@ -1,9 +1,9 @@
 const RestService = require('restful-model');
-const { BaseDataSource } = require('@superseed/core');
-// const BaseDatasource = require('../BaseDatasource');
+const { DataSource } = require('@superseed/core');
+
 const { fetchRequest, fetchResponse } = RestService.defaultMiddlewares;
 
-class APISeeder extends BaseDataSource {
+class APISeeder extends DataSource {
   constructor(model, { idField } = {}) {
     super();
     this.model = model;

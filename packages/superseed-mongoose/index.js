@@ -4,13 +4,13 @@ const set = require('lodash.set');
 const get = require('lodash.get');
 const has = require('lodash.has');
 const {
-  BaseMockGenerator,
+  MockGenerator,
   generators: { hasMany, hasOne },
 } = require('@superseed/core');
 
 // const mongooseDummyOptions = { autoDetect: false };
 
-module.exports = class MongooseMockGenerator extends BaseMockGenerator {
+module.exports = class MongooseMockGenerator extends MockGenerator {
   constructor(modelName, mongooseSchema, options = {}) {
     super();
     this.mongooseSchema = mongooseSchema;

@@ -1,11 +1,11 @@
 const MongoClient = require('mongodb');
-const { BaseDataSource } = require('@superseed/core');
+const { DataSource } = require('@superseed/core');
 
 function getInserted(insertResult) {
   return insertResult.ops;
 }
 
-class MongoDbCollection extends BaseDataSource {
+class MongoDbCollection extends DataSource {
   constructor(dbConfig, collectionName) {
     super();
     this.dbConfig = dbConfig;

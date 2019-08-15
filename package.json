@@ -6,8 +6,7 @@
     "test:integration": "npx mocha --recursive --no-timeouts integration-test/*",
     "test:packages": "lerna run test",
     "lint": "eslint packages/**/*js",
-    "lint:fix": "npm run lint -- --fix",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "lint:fix": "npm run lint -- --fix"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
@@ -31,5 +30,10 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
   }
 }

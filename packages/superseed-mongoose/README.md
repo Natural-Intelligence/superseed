@@ -61,7 +61,8 @@ const catSchema = {
 };
 
 const options = {
-  ignore: ['_id', 'id'],  
+  id: { skip: true },
+  _id: { skip: true }
 };
 
 const catOptions = {

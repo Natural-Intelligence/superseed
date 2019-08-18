@@ -13,15 +13,19 @@ npm install @superseed/mongoose
 _Example:_
 
 ```js
-const {Schema} = require('mongoose');
-const {Seeder, SeedJob} = require('@superseed/superseed');
+const { Schema } = require('mongoose');
+const { Seeder, SeedJob } = require('@superseed/superseed');
 const MongooseMockGenerator = require('@superseed/mongoose');
+const { DataSource } = require('@superseed/core');
 
-class CustomSeeded extends DataSource {
-    createSeeds(seeds) {
-        // save seed somewhere
-    }
+const ObjectId = Schema.Types.ObjectId;
+
+class CustomSeeder extends DataSource {
+  createSeeds(seeds) {
+    return seeds; // ideally should save data and return values saved 
+  }
 }
+
 const personSchema = {
   id: ObjectId,
   firstName: {
@@ -29,7 +33,7 @@ const personSchema = {
     required: true,
     lowercase: true,
     trim: true
-  }, 
+  },
   lastName: {
     type: String,
     required: true,
@@ -61,8 +65,8 @@ const catSchema = {
 };
 
 const options = {
-  id: { skip: true },
-  _id: { skip: true }
+  _id: { skip: true },
+  email: { generator: 'email' }
 };
 
 const catOptions = {
@@ -80,23 +84,55 @@ const catOptions = {
 };
 
 const personSeedJob = new SeedJob(
-    'users',
-    new MongooseMockGenerator(new Schema(userSchema), options),
-    new CustomSeeded()
+  'users',
+  new MongooseMockGenerator(new Schema(personSchema), options),
+  new CustomSeeder()
 );
 
 const catSeedJob = new SeedJob(
-    'cats',
-    new MongooseMockGenerator(new Schema(catSchema), catOptions),
-    new CustomSeeded()
+  'cats',
+  new MongooseMockGenerator(new Schema(catSchema), catOptions),
+  new CustomSeeder()
 );
 
 const seeder = new Seeder();
-seeder.addJob(personSeedJob, { count: 1 })
-.seeder.addJob(catSeedJob, { count: 2 });
+seeder.addJob(personSeedJob, {count: 1})
+  .addJob(catSeedJob, {count: 2});
 seeder.seed().then(data => {
-    console.log(data);
+  console.log(data);
 });
+```
+
+**Sample Data**
+```json
+{
+  "users":[
+    {
+      "id":"5d595690aa924497bb891281",
+      "firstName":"blkwcs$5s%",
+      "lastName":"gkwd0xh7fncad^h",
+      "email":"lapkog@tu.cy",
+      "birth_date":"2019-08-18T13:45:52.474Z",
+      "gender":"Female"
+    }
+  ],
+  "cats":[
+    {
+      "id":"5d595690aa924497bb891282",
+      "name":"qf[*ek%",
+      "ownerId":"5d595690aa924497bb891281",
+      "_id":"5d595690aa924497bb891283",
+      "fullName":"qf[*ek% gkwd0xh7fncad^h"
+    },
+    {
+      "id":"5d595690aa924497bb891284",
+      "name":"jf3inmgp",
+      "ownerId":"5d595690aa924497bb891281",
+      "_id":"5d595690aa924497bb891285",
+      "fullName":"jf3inmgp gkwd0xh7fncad^h"
+    }
+  ]
+}
 ```
 
 # Documentation

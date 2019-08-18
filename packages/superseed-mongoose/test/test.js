@@ -51,7 +51,7 @@ const catSchema = {
 };
 
 const options = {
-  ignore: ['_id', 'id'],
+  _id: {skip: true},
   contact_us: {generator: 'email'}
 };
 

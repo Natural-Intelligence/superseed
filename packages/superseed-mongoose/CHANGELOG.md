@@ -7,26 +7,52 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 ### Features
+- **Added**: `skip` option was added. See See [issue #15](https://github.com/Natural-Intelligence/superseed/issues/15) 
 
-* **mongoose:** version 3.0.0 ([fe60aa3](https://github.com/Natural-Intelligence/superseed/commit/fe60aa3))
 
+### Dependency Changes
+- Removed mongoose dependency. Package can run with version 4.x and 5.x of mongoose.
+- Replaced mongoose-dummy with fakingoose
+
+
+### Bug fixes
+- Fixed issues [#15](https://github.com/Natural-Intelligence/superseed/issues/15) and [#14](https://github.com/Natural-Intelligence/superseed/issues/14)
 
 ### BREAKING CHANGES
+- **Changed**: constructor  now receives 2 arguments (the modelName argument was removed)
+  - model: mongoose model or schema.
+  - options
+- **Removed**:`ignore` option is removed. See [issue #15](https://github.com/Natural-Intelligence/superseed/issues/15) 
+- **Removed**: `phone` and `address` generator are removed. Instead custom generator functions can be used for this. 
+- **Changed**: Array items value generator.
 
-* **mongoose:** construct signature, ignore replaced by skip, array
-item generator removed
+Example:
 
-Changes
-- Removed mongoose dependency. Package can run with version 4.x and 5.x
-of mongoose.
-- Replaced mongoose-dummy with fakingoose
-- constructor  now receives 2 arguments (the modelName argument was
-removed)
-  - model: mongoose model or schema
-- fixed embed documents bug
-- removed ignore
-- added skip option to field options
-- removed support for phone and address types
+Given the schema and options below
+```js
+const schema = {customers: [{name: String}]};
+const options = {
+  "customers": {
+     generator: () => {
+       return 'same';
+    }
+  }
+};
+const generator = new MongooseMockGenerator('Customers', new Schema(schema), options);
+const mock = generator.generateMock({});
+```
+In version 2.x the generator is called for each item in the `customers` array.
+
+In the version 3.x the `options` should be changed to
+```js
+const options = {
+  "customers": {
+     generator: () => {
+       return ['same'];
+    }
+  }
+};
+```
 
 
 

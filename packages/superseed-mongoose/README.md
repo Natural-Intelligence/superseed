@@ -92,8 +92,8 @@ const catSeedJob = new SeedJob(
 );
 
 const seeder = new Seeder();
-seeder.addJob(personSeedJob, 1)
-.seeder.addJob(catSeedJob, 2);
+seeder.addJob(personSeedJob, { count: 1 })
+.seeder.addJob(catSeedJob, { count: 2 });
 seeder.seed().then(data => {
     console.log(data);
 });

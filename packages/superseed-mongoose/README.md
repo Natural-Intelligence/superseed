@@ -146,7 +146,7 @@ seeder.seed().then(data => {
  
     * options.\<fieldName\>.**skip** <boolean>: When set to true would skip the field. No data would be generated for this field.
 
-    * options.<\fieldName\>.**generator** \<String\> or \<function\>. The following generators are supported:
+    * options.\<fieldName\>.**generator** \<String\> or \<function\>. The following generators are supported:
      
         * *hasOne*:
             
@@ -157,9 +157,9 @@ seeder.seed().then(data => {
             * _target_: target entity
             * _foreignField_: target field
             * _unique_: If the target entity must be unique
-            * min: Minimum number of entities
-            * max: Minimum number of entities
-            * amount: a fixed
+            * _min_: Minimum number of entities
+            * _max_: Minimum number of entities
+            * _amount_: a fixed
     
         * *email*: Would generate an email.
         * A *function*: a function that receives as arguments 

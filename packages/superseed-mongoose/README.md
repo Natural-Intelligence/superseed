@@ -1,4 +1,4 @@
-# super-seed-mongoose
+# @superseed/mongoose
 
 A super-seed module that allows support for MockGenerators using [mongoose](https://www.npmjs.com/package/mongoose) schema
 
@@ -17,7 +17,7 @@ const {Schema} = require('mongoose');
 const {Seeder, SeedJob} = require('@superseed/superseed');
 const MongooseMockGenerator = require('@superseed/mongoose');
 
-class CustomSeeded extends BasedataSource {
+class CustomSeeded extends DataSource {
     createSeeds(seeds) {
         // save seed somewhere
     }
@@ -80,13 +80,13 @@ const catOptions = {
 
 const personSeedJob = new SeedJob(
     'users',
-    new MongooseMockGenerator('User', new Schema(userSchema), options),
+    new MongooseMockGenerator(new Schema(userSchema), options),
     new CustomSeeded()
 );
 
 const catSeedJob = new SeedJob(
     'cats',
-    new MongooseMockGenerator('Cat', new Schema(catSchema), catOptions),
+    new MongooseMockGenerator(new Schema(catSchema), catOptions),
     new CustomSeeded()
 );
 
@@ -104,30 +104,40 @@ seeder.seed().then(data => {
 ### constructor(ModelName, mongooseSchema, options)
  * ModelName: Used when a creating a mongoose model.
  * mongooseSchema: A mongoose schema
- * `options` \<Object\> defines options per field. An option for a field must have at least one property, *generator*. The following generators are supported:
+ 
+ *  Generation options per field. Where key is the field name and value is an object.
+ 
+    * options.\<fieldName\>.**skip** <boolean>: When set to true would skip the field. No data would be generated for this field.
+
+    * options.<\fieldName\>.**generator** \<String\> or \<function\>. The following generators are supported:
      
-    * *hasOne*:
-        
-        * _target_: target entity
-        * _foreignField_: target field
-
-    * *hasMany*:
-        
-        * _target_: target entity
-        * _foreignField_: target field
-        * _unique_: If the target entity must be unique
-        * min: Minimum number of entities
-        * max: Minimum number of entities
-        * amount: a fixed
-
-    * _email_
-    * _phone_
-    * a function: a function that receives as arguments 
-      - db: all the seeds created grouped by type
-      - object: the current mock object being populated with values
-      Another way to access these values is via this.db and this.object. Not that accessing via this would not work for arrow functions.
+        * *hasOne*:
+            
+            * _target_: target entity
+            * _foreignField_: target field
+    
+        * *hasMany*:        
+            * _target_: target entity
+            * _foreignField_: target field
+            * _unique_: If the target entity must be unique
+            * min: Minimum number of entities
+            * max: Minimum number of entities
+            * amount: a fixed
+    
+        * *email*: Would generate an email.
+        * A *function*: a function that receives as arguments 
+          - db: all the seeds created grouped by type
+          - object: the current mock object being populated with values
+          Another way to access these values is via this.db and this.object. Not that accessing via this would not work for arrow functions.
 
 ### generateMock(db, staticField)
   * `db` \<Object\> A plain object where a *key* is the entity key and *value* is an array of entities. Is used 
   * `staticFields` \<Object\> used to define that do not need dynamic data. The provided values would be used.   
 
+
+# Mongoose versions
+ 
+ | Version | Supported          |
+ | ------- | ------------------ |
+ | 5.x     | :white_check_mark: |
+ | 4.x     | :white_check_mark: |

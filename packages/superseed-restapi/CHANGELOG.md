@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/Natural-Intelligence/superseed/compare/@superseed/restapi@1.1.4...@superseed/restapi@1.1.5) (2019-09-03)
+
+**Note:** Version bump only for package @superseed/restapi
+
+
+
+
+
 ## [1.1.4](https://github.com/Natural-Intelligence/superseed/compare/@superseed/restapi@1.1.3...@superseed/restapi@1.1.4) (2019-08-15)
 
 **Note:** Version bump only for package @superseed/restapi

@@ -1,9 +1,9 @@
 # @superseed/restapi
-REST API data source for super-seed
+REST API data source for [superseed](https://www.npmjs.com/package/@superseed/superseed)
 
 # Install
 ```bash
-npm install super-seed-restapi
+npm i @superseed/restapi
 ```
 
 ## Usage example

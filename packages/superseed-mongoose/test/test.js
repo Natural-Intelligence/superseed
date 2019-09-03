@@ -82,6 +82,13 @@ describe('MongooseMockGenerator test', () => {
     expect(mock1).to.deep.eql(mock2);
   });
 
+   it('skip', () => {
+     const generator = new MongooseMockGenerator(new Schema({name: String, nickname: String}), {nickname: {skip: true}});
+     const data = generator.generateMock({});
+     expect(data).to.have.property('name');
+     expect(data).not.to.have.property('nickname');
+   });
+
   it('simple test', () => {
     const data = [generator.generateMock({})];
     data.forEach(item => {

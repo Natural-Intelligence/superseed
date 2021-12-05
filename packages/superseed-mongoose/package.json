@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@superseed/core": "^2.0.0",
-    "fakingoose": "^1.0.0"
+    "fakingoose": "^1.5.7"
   },
   "peerDependencies": {
     "@superseed/superseed": "^2.0.0"
